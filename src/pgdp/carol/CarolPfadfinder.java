@@ -14,6 +14,20 @@ public class CarolPfadfinder {
 
 		return false;
 	}
+	static boolean wasThereBefore(char[] instr, int filled)
+	{
+		int posX,posY;
+		int blocknum;
+		int dir=0;
+		return true;
+	}
+	static int getMinimalStepsAndTurns(int x, int y, int direction, int findX, int findY)
+	{
+        return 0;
+	}
+	public static boolean findInstructions(int[][] playground, int x, int y, int direction, int blocks, int findX, int findY, char[] instructions){
+		return false;
+	}
 	public static void main(String[] args) {
 		/*
 		 * You can change this main-Method as you want. This is not being tested.

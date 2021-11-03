@@ -28,6 +28,11 @@ public class CarolPfadfinder {
 	public static boolean findInstructions(int[][] playground, int x, int y, int direction, int blocks, int findX, int findY, char[] instructions){
 		return false;
 	}
+	public static char[] findOptimalSolution(int[][] playground, int x, int y, int direction, int blocks, int findX, int findY, int searchLimit){
+		char [] j = new char[2];
+		return j;
+
+	}
 	public static void main(String[] args) {
 		/*
 		 * You can change this main-Method as you want. This is not being tested.

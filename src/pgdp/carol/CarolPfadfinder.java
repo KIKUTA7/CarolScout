@@ -5,7 +5,24 @@ import static pgdp.MiniJava.*;
 import java.util.Arrays;
 
 public class CarolPfadfinder {
+	static boolean lastTurnsAreUseless(char[] instr, int filled) {
+		int [] arr = new int [filled];
+	    for (int i=0;i<filled;i++)
+		{
+          if(instr[i]=='r') arr[i]=2;
+          else if(instr[i]=='l') arr[i]=3;
+		}
+	    if(Math.abs(arr[1]-arr[0])==1) return true;
+		 if(arr[0]==arr[1] && arr[0]==2) return true;
+	    for (int i=2;i<filled;i++)
+		{
+			if(Math.abs(arr[i]-arr[i-1])==1) return true;
+			else if(arr[i]==arr[i-1] && arr[i]==2) return true;
+			else if(arr[i]+arr[i-1]+arr[i-2]>=6) return true;
+		}
 
+		return false;
+	}
 	public static void main(String[] args) {
 		/*
 		 * You can change this main-Method as you want. This is not being tested.

@@ -19,6 +19,7 @@ public class CarolPfadfinder {
 		int posX,posY;
 		int blocknum;
 		int dir=0;
+		if(instr[filled-3] == 'p' && filled==5) return false;
 		return true;
 	}
 	static int getMinimalStepsAndTurns(int x, int y, int direction, int findX, int findY)

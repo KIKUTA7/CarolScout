@@ -75,7 +75,7 @@ public class CarolPfadfinder {
         return result;
     }
 
-    public static boolean findInstructions(int[][] playground, int x, int y, int direction, int blocks, int findX, int findY, char[] instructions) {
+  /*  public static boolean findInstructions(int[][] playground, int x, int y, int direction, int blocks, int findX, int findY, char[] instructions) {
 
         return false;
     }
@@ -85,7 +85,7 @@ public class CarolPfadfinder {
         return j;
 
     }
-
+*/
     public static void main(String[] args) {
         /*
          * You can change this main-Method as you want. This is not being tested.

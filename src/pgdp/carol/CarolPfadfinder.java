@@ -19,11 +19,12 @@ public class CarolPfadfinder {
 		if(instr.length==0) return false;
 		if(filled==0) return true;
 		if(instr[filled-1]=='r' || instr[filled-1]=='l') return true;
-		int blocknum=0;
-
-		int posX=0, posY=0;
-		int step=0;
 		for (int dir=0 ;dir<4;dir++) {
+
+			int blocknum=0;
+
+			int posX=0, posY=0;
+			int step=0;
 			int dir1=dir;
 			for (int i = filled - 1; i >= 0; i--) {
 				if (instr[i] == 'l') {

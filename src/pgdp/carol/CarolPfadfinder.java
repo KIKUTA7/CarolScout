@@ -16,6 +16,7 @@ public class CarolPfadfinder {
 	}
 	static boolean wasThereBefore(char[] instr, int filled)
 	{
+
 		if(instr[filled-1]=='r' || instr[filled-1]=='l') return true;
 		int blocknum=0;
 		int dir=0;
@@ -27,17 +28,19 @@ public class CarolPfadfinder {
 			{
 				dir = (dir + 3) % 4;
 				if(dir%2==1) posY+=step*(-1)*((dir-2)%4);
-				if(dir%2==0) posX+=step*(-1)*((dir-2)%4+1);
+				else posX+=step*(-1)*((dir-2)%4+1);
+				step=0;
 			}
 			else if(instr[i]=='r'){
 				dir=(dir+1)%4;
 				if(dir%2==1) posY+=step*(-1)*((dir-2)%4);
-				if(dir%2==0) posX+=step*(-1)*((dir-2)%4+1);
+				else posX+=step*(-1)*((dir-2)%4+1);
+				step=0;
 			}
 			else if(instr[i]=='p') blocknum++;
 			else if(instr[i]=='n') blocknum--;
             else if(instr[i]=='s') step++;
-            if(posX==0 && posY==0 && blocknum==0) return true;
+            if(posX==0 && posY==0 && blocknum==0 && step==0) return true;
 		}
 		return false;
 	}

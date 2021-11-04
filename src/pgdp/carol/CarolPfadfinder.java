@@ -16,36 +16,34 @@ public class CarolPfadfinder {
 	}
 	static boolean wasThereBefore(char[] instr, int filled)
 	{
-
+		if(filled==0) return true;
 		if(instr[filled-1]=='r' || instr[filled-1]=='l') return true;
 		int blocknum=0;
-		int dir=0;
+
 		int posX=0, posY=0;
 		int step=0;
-		for (int i=filled-1;i>=0;i--)
-		{
-			if(instr[i]=='l')
-			{
-				dir = (dir + 3) % 4;
-				if(dir%2==1) posY+=step*(-1)*((dir-2)%4);
-				else posX+=step*(-1)*((dir-2)%4+1);
-				step=0;
+		for (int dir =0 ;dir <4;dir++) {
+			for (int i = filled - 1; i >= 0; i--) {
+				if (instr[i] == 'l') {
+					dir = (dir + 3) % 4;
+					if (dir % 2 == 1) posY += step * (-1) * ((dir - 2) % 4);
+					else posX += step * (-1) * ((dir - 2) % 4 + 1);
+					step = 0;
+				} else if (instr[i] == 'r') {
+					dir = (dir + 1) % 4;
+					if (dir % 2 == 1) posY += step * (-1) * ((dir - 2) % 4);
+					else posX += step * (-1) * ((dir - 2) % 4 + 1);
+					step = 0;
+				} else if (instr[i] == 'p') blocknum++;
+				else if (instr[i] == 'n') blocknum--;
+				else if (instr[i] == 's') step++;
+				if (posX == 0 && posY == 0 && blocknum == 0 && step == 0) return true;
 			}
-			else if(instr[i]=='r'){
-				dir=(dir+1)%4;
-				if(dir%2==1) posY+=step*(-1)*((dir-2)%4);
-				else posX+=step*(-1)*((dir-2)%4+1);
-				step=0;
+			if (step > 0) {
+				if (dir % 2 == 1) posY += step * (-1) * ((dir - 2) % 4);
+				else posX += step * (-1) * ((dir - 2) % 4 + 1);
+				step = 0;
 			}
-			else if(instr[i]=='p') blocknum++;
-			else if(instr[i]=='n') blocknum--;
-            else if(instr[i]=='s') step++;
-			if(posX==0 && posY==0 && blocknum==0 && step==0) return true;
-			}
-		if(step>0) {
-			if(dir%2==1) posY+=step*(-1)*((dir-2)%4);
-			else posX+=step*(-1)*((dir-2)%4+1);
-			step=0;
 		}
 		if(posX==0 && posY==0 && blocknum==0 && step==0) return true;
 		return false;

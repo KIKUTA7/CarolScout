@@ -22,32 +22,26 @@ public class CarolPfadfinder {
         if (filled == 0) return false;
         if (instr[filled - 1] == 'r' || instr[filled - 1] == 'l') return true;
         int posX = 0, posY = 0;
-        int step = 0;
         int dir = 0;
         for (int i = filled - 1; i >= 0; i--) {
             if (instr[i] == 'l') {
 
-                if (dir % 2 == 1) posY += step * (-1) * ((dir - 2));
-                else posX += step * (-1) * ((dir - 2) + 1);
                 dir = (dir + 3) % 4;
-                step = 0;
             } else if (instr[i] == 'r') {
 
-                if (dir % 2 == 1) posY += step * (-1) * (dir - 2);
-                else posX += step * (-1) * ((dir - 2)  + 1);
                 dir = (dir + 1) % 4;
-                step = 0;
+
             } else if (instr[i] == 'p') return false;
             else if (instr[i] == 'n') return false;
-            else if (instr[i] == 's') step++;
-            if (posX == 0 && posY == 0 && step == 0) return true;
+            else if (instr[i] == 's') {
+                if (dir % 2 == 1) posY +=  (-1) * (dir - 2);
+                else posX += (-1) * ((dir - 2)  + 1);
+            }
+            if (posX == 0 && posY == 0) return true;
+
         }
-        if (step > 0) {
-            if (dir % 2 == 1) posY += step * (-1) * (dir - 2);
-            else posX += step * (-1) * ((dir - 2)  + 1);
-            step = 0;
-        }
-        if (posX == 0 && posY == 0 && step == 0) return true;
+
+
 
 
         return false;
@@ -116,7 +110,8 @@ public class CarolPfadfinder {
         int findY = 4;
 
         // this is expected to have an optimal solution with exactly 40 instructions
-        char[] instructions = null;
+        char[] instructions = {'n','s','l','s','l','s','l','s'};
+	    boolean u=wasThereBefore(instructions,8);
 //		instructions = findOptimalSolution(playground, startX, startY, startDir, startBlocks, findX, findY, 40); // TODO implement
         boolean success = instructions != null;
 

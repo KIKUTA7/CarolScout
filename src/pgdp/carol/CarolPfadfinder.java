@@ -16,7 +16,7 @@ public class CarolPfadfinder {
 	}
 	static boolean wasThereBefore(char[] instr, int filled)
 	{
-		if(instr==null) return false;
+		if(instr.length==0) return false;
 		if(filled==0) return true;
 		if(instr[filled-1]=='r' || instr[filled-1]=='l') return true;
 		int blocknum=0;

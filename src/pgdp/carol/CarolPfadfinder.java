@@ -10,11 +10,12 @@ public class CarolPfadfinder {
         if (instr[filled - 1] == 'r' && instr[filled - 2] == 'l') return true;
         if (instr[filled - 1] == 'l' && instr[filled - 2] == 'r') return true;
         if (instr[filled - 1] == 'r' && instr[filled - 2] == 'r') return true;
-        if (instr[filled - 1] == instr[filled - 2] && instr[filled - 1] == instr[filled - 3] && instr[filled - 1] == 'r')
-            return true;
-        if (instr[filled - 1] == instr[filled - 2] && instr[filled - 1] == instr[filled - 3] && instr[filled - 1] == 'l')
-            return true;
-
+        if(filled >=3) {
+            if (instr[filled - 1] == instr[filled - 2] && instr[filled - 1] == instr[filled - 3] && instr[filled - 1] == 'r')
+                return true;
+            if (instr[filled - 1] == instr[filled - 2] && instr[filled - 1] == instr[filled - 3] && instr[filled - 1] == 'l')
+                return true;
+        }
         return false;
     }
 

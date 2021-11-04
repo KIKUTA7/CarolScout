@@ -20,22 +20,22 @@ public class CarolPfadfinder {
 		if(filled==0) return true;
 		if(instr[filled-1]=='r' || instr[filled-1]=='l') return true;
 		for (int dir=0 ;dir<4;dir++) {
-
 			int blocknum=0;
-
 			int posX=0, posY=0;
 			int step=0;
 			int dir1=dir;
 			for (int i = filled - 1; i >= 0; i--) {
 				if (instr[i] == 'l') {
-					dir = (dir + 3) % 4;
+
 					if (dir % 2 == 1) posY += step * (-1) * ((dir - 2) % 4);
 					else posX += step * (-1) * ((dir - 2) % 4 + 1);
+					dir = (dir + 3) % 4;
 					step = 0;
 				} else if (instr[i] == 'r') {
-					dir = (dir + 1) % 4;
+
 					if (dir % 2 == 1) posY += step * (-1) * ((dir - 2) % 4);
 					else posX += step * (-1) * ((dir - 2) % 4 + 1);
+					dir = (dir + 1) % 4;
 					step = 0;
 				}
 				else if (instr[i] == 'p') blocknum++;

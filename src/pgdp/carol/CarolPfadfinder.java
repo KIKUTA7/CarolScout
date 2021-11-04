@@ -6,6 +6,7 @@ import java.util.Arrays;
 
 public class CarolPfadfinder {
     static boolean lastTurnsAreUseless(char[] instr, int filled) {
+                if(filled <2) return false;
         if (instr[filled - 1] == 'r' && instr[filled - 2] == 'l') return true;
         if (instr[filled - 1] == 'l' && instr[filled - 2] == 'r') return true;
         if (instr[filled - 1] == 'r' && instr[filled - 2] == 'r') return true;
@@ -112,6 +113,7 @@ public class CarolPfadfinder {
         // this is expected to have an optimal solution with exactly 40 instructions
         char[] instructions = {'n','s','l','s','l','s','l','s'};
 	    boolean u=wasThereBefore(instructions,8);
+
 //		instructions = findOptimalSolution(playground, startX, startY, startDir, startBlocks, findX, findY, 40); // TODO implement
         boolean success = instructions != null;
 

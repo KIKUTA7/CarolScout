@@ -38,17 +38,17 @@ public class CarolPfadfinder {
 					dir = (dir + 1) % 4;
 					step = 0;
 				}
-				else if (instr[i] == 'p') blocknum++;
-				else if (instr[i] == 'n') blocknum--;
+				else if (instr[i] == 'p') return false;
+				else if (instr[i] == 'n') return false;
 				else if (instr[i] == 's') step++;
-				if (posX == 0 && posY == 0 && blocknum == 0 && step == 0) return true;
+				if (posX == 0 && posY == 0  && step == 0) return true;
 			}
 			if (step > 0) {
 				if (dir % 2 == 1) posY += step * (-1) * ((dir - 2) % 4);
 				else posX += step * (-1) * ((dir - 2) % 4 + 1);
 				step = 0;
 			}
-			if(posX==0 && posY==0 && blocknum==0 && step==0) return true;
+			if(posX==0 && posY==0  && step==0) return true;
 			dir=dir1;
 		}
 

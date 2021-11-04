@@ -16,11 +16,30 @@ public class CarolPfadfinder {
 	}
 	static boolean wasThereBefore(char[] instr, int filled)
 	{
-		int posX,posY;
-		int blocknum;
+		if(instr[filled-1]=='r' || instr[filled-1]=='l') return true;
+		int blocknum=0;
 		int dir=0;
-		if(instr[filled-3] == 'p' && filled==5) return false;
-		return true;
+		int posX=0, posY=0;
+		int step=0;
+		for (int i=filled-1;i>=0;i--)
+		{
+			if(instr[i]=='l')
+			{
+				dir = (dir + 3) % 4;
+				if(dir%2==1) posY+=step*(-1)*((dir-2)%4);
+				if(dir%2==0) posX+=step*(-1)*((dir-2)%4+1);
+			}
+			else if(instr[i]=='r'){
+				dir=(dir+1)%4;
+				if(dir%2==1) posY+=step*(-1)*((dir-2)%4);
+				if(dir%2==0) posX+=step*(-1)*((dir-2)%4+1);
+			}
+			else if(instr[i]=='p') blocknum++;
+			else if(instr[i]=='n') blocknum--;
+            else if(instr[i]=='s') step++;
+            if(posX==0 && posY==0 && blocknum==0) return true;
+		}
+		return false;
 	}
 	static int getMinimalStepsAndTurns(int x, int y, int direction, int findX, int findY)
 	{
@@ -57,6 +76,7 @@ public class CarolPfadfinder {
 		return result;
 	}
 	public static boolean findInstructions(int[][] playground, int x, int y, int direction, int blocks, int findX, int findY, char[] instructions){
+
 		return false;
 	}
 	public static char[] findOptimalSolution(int[][] playground, int x, int y, int direction, int blocks, int findX, int findY, int searchLimit){

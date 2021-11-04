@@ -40,8 +40,14 @@ public class CarolPfadfinder {
 			else if(instr[i]=='p') blocknum++;
 			else if(instr[i]=='n') blocknum--;
             else if(instr[i]=='s') step++;
-            if(posX==0 && posY==0 && blocknum==0 && step==0) return true;
+			if(posX==0 && posY==0 && blocknum==0 && step==0) return true;
+			}
+		if(step>0) {
+			if(dir%2==1) posY+=step*(-1)*((dir-2)%4);
+			else posX+=step*(-1)*((dir-2)%4+1);
+			step=0;
 		}
+		if(posX==0 && posY==0 && blocknum==0 && step==0) return true;
 		return false;
 	}
 	static int getMinimalStepsAndTurns(int x, int y, int direction, int findX, int findY)

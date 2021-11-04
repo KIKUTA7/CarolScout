@@ -22,7 +22,8 @@ public class CarolPfadfinder {
 
 		int posX=0, posY=0;
 		int step=0;
-		for (int dir =0 ;dir <4;dir++) {
+		for (int dir=0 ;dir<4;dir++) {
+			int dir1=dir;
 			for (int i = filled - 1; i >= 0; i--) {
 				if (instr[i] == 'l') {
 					dir = (dir + 3) % 4;
@@ -44,6 +45,7 @@ public class CarolPfadfinder {
 				else posX += step * (-1) * ((dir - 2) % 4 + 1);
 				step = 0;
 			}
+			dir=dir1;
 		}
 		if(posX==0 && posY==0 && blocknum==0 && step==0) return true;
 		return false;

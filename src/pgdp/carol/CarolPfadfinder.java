@@ -135,7 +135,7 @@ public class CarolPfadfinder {
         else t2 = findInstructions0(playground,x,y,dir2,blocks,findX,findY,instructions,steps+1);
 
         instructions[steps] = 's';
-        if(wasThereBefore(instructions,steps+1)) t3=false;
+        if(wasThereBefore(instructions,steps)) t3=false;
         else{
         if(direction % 2 == 1)
         {

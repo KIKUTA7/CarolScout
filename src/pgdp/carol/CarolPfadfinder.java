@@ -86,8 +86,8 @@ public class CarolPfadfinder {
         int x0=x,y0=y,dir0=direction,blocks0=blocks;
         char[] inst2 = instructions;
         if(!findInstructions0(playground, x, y, direction, blocks, findX, findY, instructions, steps)) return false;
- /*      x=x0; y=y0; direction=dir0; blocks=blocks0; steps=0;
-            for (int i=instructions.length - 1;i>=get;i--)
+    x=x0; y=y0; direction=dir0; blocks=blocks0; steps=0;
+       /*     for (int i=instructions.length - 1;i>=get;i--)
         {
             char [] inst1 = new char [i];
 
@@ -101,7 +101,7 @@ public class CarolPfadfinder {
             else break;
 
         } */
-        return findInstructions0(playground,x,y,direction,blocks,findX,findY,inst2,0);
+        return findInstructions0(playground,x,y,direction,blocks,findX,findY,inst2,steps);
 
 
 

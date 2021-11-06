@@ -154,7 +154,7 @@ public class CarolPfadfinder {
 
         }
         instructions[steps] = 'n';
-        if(instructions[steps - 1]=='p') t4=false;
+        if(steps > 0 && instructions[steps - 1]=='p') t4=false;
         else {
         if (direction % 2 == 1)
         {
@@ -183,7 +183,7 @@ public class CarolPfadfinder {
 
         }}
         instructions [steps] = 'p';
-        if(instructions[steps-1]=='n') t5=false;
+        if(steps>0 && instructions[steps-1]=='n') t5=false;
         else{
         if(direction % 2 == 1)
         {

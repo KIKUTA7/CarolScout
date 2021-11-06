@@ -103,7 +103,7 @@ public class CarolPfadfinder {
         dir2 = (direction+1) % 4;
         instructions[steps] = 'l';
         if(lastTurnsAreUseless(instructions,steps+1)) t2=false;
-        t2 = findInstructions0(playground,x,y,dir2,blocks,findX,findY,instructions,steps+1);
+        else t2 = findInstructions0(playground,x,y,dir2,blocks,findX,findY,instructions,steps+1);
         if(t2) return true;
         instructions[steps] = 's';
         if(direction % 2 == 1)

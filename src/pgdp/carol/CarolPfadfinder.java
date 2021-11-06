@@ -81,6 +81,7 @@ public class CarolPfadfinder {
         Arrays.fill(instructions, 'e');
         return findInstructions0(playground,x,y,direction,blocks,findX,findY,instructions,steps);
 
+
     }
     public static boolean findInstructions0(int[][] playground, int x, int y, int direction, int blocks, int findX, int findY, char[] instructions,int steps) {
         if(steps > instructions.length - 1) return false;
@@ -97,17 +98,15 @@ public class CarolPfadfinder {
         boolean t1,t2,t3,t4,t5;
         dir1 = (direction+3) % 4;
         instructions[steps] = 'r';
-        if(lastTurnsAreUseless(instructions,steps)) t1=false;
-        else t1 = findInstructions0(playground,x,y,dir1,blocks,findX,findY,instructions,steps+1);
+        //if(lastTurnsAreUseless(instructions,steps + 1)) t1=false;
+         t1 = findInstructions0(playground,x,y,dir1,blocks,findX,findY,instructions,steps+1);
         if(t1) return true;
         dir2 = (direction+1) % 4;
         instructions[steps] = 'l';
-           if(lastTurnsAreUseless(instructions,steps)) t2=false;
-        else t2 = findInstructions0(playground,x,y,dir2,blocks,findX,findY,instructions,steps+1);
+        //   if(lastTurnsAreUseless(instructions,steps + 1)) t2=false;
+         t2 = findInstructions0(playground,x,y,dir2,blocks,findX,findY,instructions,steps+1);
         if(t2) return true;
         instructions[steps] = 's';
-
-
         if (direction % 2 == 1) {
             posy = y + (-1) * (direction - 2);
             if (0 <= posy && posy <= playground[0].length - 1 && Math.abs(playground[posx][posy] - playground[x][y]) <= 1)

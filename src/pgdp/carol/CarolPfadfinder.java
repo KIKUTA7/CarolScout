@@ -83,12 +83,7 @@ public class CarolPfadfinder {
 
     }
     public static boolean findInstructions0(int[][] playground, int x, int y, int direction, int blocks, int findX, int findY, char[] instructions,int steps) {
-
         if(steps > instructions.length - 1) return false;
-        if(lastTurnsAreUseless(instructions,steps - 1)) {
-            instructions[steps-1] = 'e';
-            findInstructions0(playground,x,y,direction,blocks,findX,findY,instructions,steps - 1);
-        }
         if(x==findX && y==findY && steps==instructions.length - 1) return true;
         if(x==findX && y==findY && steps<instructions.length - 1)
         {
@@ -153,7 +148,7 @@ public class CarolPfadfinder {
 
         }
         instructions [steps] = 'p';
-        if (direction % 2 == 1)
+        if(direction % 2 == 1)
         {
             posy = y+(-1)*(direction-2);
             if(playground[x][y] != -1 && blocks >= 1 && 0 <= posy && posy <= playground[0].length - 1 && playground[posx][posy] < 9)
@@ -164,6 +159,7 @@ public class CarolPfadfinder {
             }
             else t5=false;
             return t5;
+
         }
         else
         {
@@ -203,6 +199,7 @@ public class CarolPfadfinder {
 //        };
         int[][] playground = {{0}};
         char [] k = new char [] {};
+
         System.out.println(findInstructions(playground,0,0,1,0,0,0,k));
 //        int startX = 2;
 //        int startY = 1;

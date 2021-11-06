@@ -130,7 +130,8 @@ public class CarolPfadfinder {
         else t2 = findInstructions0(playground,x,y,dir2,blocks,findX,findY,instructions,steps+1);
 
         instructions[steps] = 's';
-
+        if(wasThereBefore(instructions,steps + 1)) t3=false;
+        else{
         if(direction % 2 == 1)
         {
             posy = y+(-1)*(direction-2);
@@ -146,7 +147,7 @@ public class CarolPfadfinder {
             t3 = findInstructions0(playground,posx,posy,direction,blocks,findX,findY,instructions,steps + 1);
             else t3=false;
 
-        }
+        }}
         instructions[steps] = 'n';
         if(steps > 0 && instructions[steps - 1]=='p') t4=false;
         else {

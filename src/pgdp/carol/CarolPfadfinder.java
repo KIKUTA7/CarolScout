@@ -82,6 +82,10 @@ public class CarolPfadfinder {
 
     }
     public static boolean findInstructions0(int[][] playground, int x, int y, int direction, int blocks, int findX, int findY, char[] instructions,int steps) {
+        if (findX<0 || findX>= playground.length - 1 ||findY<0 || findY>=playground[0].length- 1) return false;
+        if(direction < 0 || direction > 3 ) return false;
+        if(x<0 || x>= playground.length - 1 || y<0 || y>=playground[0].length- 1) return false;
+        if(blocks < 0 || blocks > 10) return false;
         if(steps > instructions.length - 1) return false;
         if(x==findX && y==findY && steps==instructions.length - 1) return true;
         if(x==findX && y==findY && steps<instructions.length - 1)

@@ -78,8 +78,16 @@ public class CarolPfadfinder {
 
     public static boolean findInstructions(int[][] playground, int x, int y, int direction, int blocks, int findX, int findY, char[] instructions) {
         int steps = 0;
-        Arrays.fill(instructions, 'e');
-        return findInstructions0(playground,x,y,direction,blocks,findX,findY,instructions,steps);
+        for (int i=getMinimalStepsAndTurns(x,y,direction,findX,findY);i<instructions.length;i++)
+        {
+            char [] instr1 = new char [i];
+            Arrays.fill(instr1, 'e');
+            int x0=x,y0=y,block0=blocks,dir0=direction;
+            if(findInstructions0(playground,x0,y0,dir0,block0,findX,findY,instr1,0)) return true;
+
+
+        }
+        return false;
 
 
     }

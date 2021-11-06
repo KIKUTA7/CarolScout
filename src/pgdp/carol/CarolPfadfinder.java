@@ -113,7 +113,7 @@ public class CarolPfadfinder {
 //            else return false;
 //        }
         if(steps > instructions.length - 1) return false;
-        if(wasThereBefore(instructions,steps)) return false;
+        if(wasThereBefore(instructions,steps + 1)) return false;
         if(x==findX && y==findY && steps==instructions.length - 1) return true;
         if(x==findX && y==findY && steps<instructions.length - 1)
         {

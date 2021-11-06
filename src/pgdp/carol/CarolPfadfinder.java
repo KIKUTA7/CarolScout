@@ -78,21 +78,9 @@ public class CarolPfadfinder {
 
     public static boolean findInstructions(int[][] playground, int x, int y, int direction, int blocks, int findX, int findY, char[] instructions) {
         int steps = 0;
-        int k=0;
-        int x0=x, y0=y, dir0=direction, blocks0=blocks;
-        char [] instructions1 = new char [instructions.length - k];
-        Arrays.fill(instructions1, 'e');
-        char [] instructions2 = new char [instructions.length - k];
-        while (instructions1.length > getMinimalStepsAndTurns(x,y,direction,findX,findY) && findInstructions0(playground, x, y, direction, blocks, findX, findY, instructions1, steps)) {
-            k++;
-            instructions2 = instructions1;
-            instructions1 = new char [instructions.length - k];
-            Arrays.fill(instructions1, 'e');
-            steps = 0;
-            x=x0;y=y0;direction = dir0;blocks = blocks0;
-        }
+        Arrays.fill(instructions, 'e');
+        return findInstructions0(playground,x,y,direction,blocks,findX,findY,instructions,steps);
 
-        return findInstructions0(playground, x, y, direction, blocks, findX, findY, instructions2, steps);
     }
     public static boolean findInstructions0(int[][] playground, int x, int y, int direction, int blocks, int findX, int findY, char[] instructions,int steps) {
         if(steps > instructions.length - 1) return false;
@@ -212,7 +200,7 @@ public class CarolPfadfinder {
 //                {-1, -1, 9, 5, 3} //
 //        };
         int[][] playground = {{0}};
-        char [] k = new char [] {'1'};
+        char [] k = new char [] {};
 
         System.out.println(findInstructions(playground,0,0,1,0,0,0,k));
 //        int startX = 2;

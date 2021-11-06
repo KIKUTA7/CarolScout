@@ -90,6 +90,7 @@ public class CarolPfadfinder {
             }
             return true;
         }
+        if(steps > instructions.length - 1) return false;
         int dir1,dir2,posy = y,posx = x;
         boolean t1,t2,t3,t4,t5;
         dir1 = (direction+3) % 4;

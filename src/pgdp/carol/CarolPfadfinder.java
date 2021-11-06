@@ -7,16 +7,20 @@ import java.util.Arrays;
 public class CarolPfadfinder {
     static boolean lastTurnsAreUseless(char[] instr, int filled) {
                 if(filled <2 && filled>=0) return false;
+                else if(filled == 2){
         if (instr[filled - 1] == 'r' && instr[filled - 2] == 'l') return true;
-        if (instr[filled - 1] == 'l' && instr[filled - 2] == 'r') return true;
-        if (instr[filled - 1] == 'r' && instr[filled - 2] == 'r') return true;
-        if(filled >=3) {
-            if (instr[filled - 1] == instr[filled - 2] && instr[filled - 1] == instr[filled - 3] && instr[filled - 1] == 'r')
+        else if (instr[filled - 1] == 'l' && instr[filled - 2] == 'r') return true;
+        else if (instr[filled - 1] == 'r' && instr[filled - 2] == 'r') return true;}
+        else if(filled >=3) {
+                    if (instr[filled - 1] == 'r' && instr[filled - 2] == 'l') return true;
+                    else if (instr[filled - 1] == 'l' && instr[filled - 2] == 'r') return true;
+                    else if (instr[filled - 1] == 'r' && instr[filled - 2] == 'r') return true;
+            else if (instr[filled - 1] == instr[filled - 2] && instr[filled - 1] == instr[filled - 3] && instr[filled - 1] == 'r')
                 return true;
-            if (instr[filled - 1] == instr[filled - 2] && instr[filled - 1] == instr[filled - 3] && instr[filled - 1] == 'l')
+            else if (instr[filled - 1] == instr[filled - 2] && instr[filled - 1] == instr[filled - 3] && instr[filled - 1] == 'l')
                 return true;
         }
-        return false;
+         return false;
     }
 
     static boolean wasThereBefore(char[] instr, int filled) {
@@ -42,10 +46,6 @@ public class CarolPfadfinder {
             if (posX == 0 && posY == 0) return true;
 
         }
-
-
-
-
         return false;
     }
 
@@ -77,8 +77,97 @@ public class CarolPfadfinder {
     }
 
     public static boolean findInstructions(int[][] playground, int x, int y, int direction, int blocks, int findX, int findY, char[] instructions) {
+        int steps = 0;
+        return findInstructions0(playground,x,y,direction,blocks,findX,findY,instructions,steps);
 
+    }
+    public static boolean findInstructions0(int[][] playground, int x, int y, int direction, int blocks, int findX, int findY, char[] instructions,int steps) {
+        if(x==findX && y==findY && steps==instructions.length - 1) return true;
+        if(x==findX && y==findY && steps<instructions.length - 1)
+        {
+            for (int i = steps ; i < instructions.length - 1 ; i++) {
+                instructions[i] = 'e';
+            }
+            return true;
+        }
+        int dir1,dir2,posy = y,posx = x;
+        boolean t1,t2,t3,t4,t5;
+        dir1 = (direction+3) % 4;
+        instructions[steps] = 'r';
+        t1 = findInstructions0(playground,x,y,dir1,blocks,findX,findY,instructions,steps+1);
+        dir2 = (direction+1) % 4;
+        instructions[steps] = 'l';
+        t2 = findInstructions0(playground,x,y,dir2,blocks,findX,findY,instructions,steps+1);
+        instructions[steps] = 's';
+    /*    if (dir % 2 == 1) posY +=  (-1) * (dir - 2);
+        else posX += (-1) * ((dir - 2)  + 1); */
+        if(direction % 2 == 1)
+        {
+            posy = y+(-1)*(direction-2);
+            if(0 <= posy && posy <= playground[0].length - 1 && Math.abs(playground[posx][posy]-playground[x][y]) <= 1)
+                t3 = findInstructions0(playground,posx,y+(-1)*(direction-2),direction,blocks,findX,findY,instructions,steps + 1);
+            else t3 = false;
+        }
+        else
+        {
+            posx = x+(-1)*(direction-1);
+            if(0 <= posx && posx <= playground.length - 1 && Math.abs(playground[posx][posy]-playground[x][y]) <= 1)
+            t3 = findInstructions0(playground,x+(-1)*(direction-1),posy,direction,blocks,findX,findY,instructions,steps + 1);
+            else t3=false;
+        }
+        instructions[steps] = 'n';
+        if (direction % 2 == 1)
+        {
+            posy = y+(-1)*(direction-2);
+            if(playground[x][y] != -1 && blocks < 10 && 0 <= posy && posy <= playground[0].length - 1 && playground[posx][posy] > -1)
+            {
+                playground[posx][posy]--;
+                blocks++;
+                t4 = findInstructions0(playground,x,y,direction,blocks,findX,findY,instructions,steps+1);
+            }
+            else t4 = false;
+
+        }
+        else
+        {
+            posx = x+(-1)*(direction-1);
+            if(playground[x][y] != -1 && blocks < 10 && 0 <= posx && posx <= playground.length - 1 && playground[posx][posy] > -1)
+            {
+                playground[posx][posy]--;
+                blocks++;
+                t4 = findInstructions0(playground,x,y,direction,blocks,findX,findY,instructions,steps+1);
+            }
+            else t4 = false;
+
+        }
+        instructions [steps] = 'p';
+        if(direction % 2 == 1)
+        {
+            posy = y+(-1)*(direction-2);
+            if(playground[x][y] != -1 && blocks >= 1 && 0 <= posy && posy <= playground[0].length - 1 && playground[posx][posy] < 9)
+            {
+                playground[posx][posy]++;
+                blocks--;
+                t5 = findInstructions0(playground,x,y,direction,blocks,findX,findY,instructions,steps+1);
+            }
+            else t5=false;
+
+        }
+        else
+        {
+            posx = x+(-1)*(direction-1);
+            if(playground[x][y] != -1 && blocks >= 1 && 0 <= posx && posx <= playground.length - 1 && playground[posx][posy] < 9)
+            {
+                playground[posx][posy]++;
+                blocks--;
+                t5 = findInstructions0(playground,x,y,direction,blocks,findX,findY,instructions,steps+1);
+            }
+            else t5=false;
+
+        }
+        if(t1 || t2 || t3 || t4 || t5) return true;
         return false;
+
     }
 
     public static char[] findOptimalSolution(int[][] playground, int x, int y, int direction, int blocks, int findX, int findY, int searchLimit) {

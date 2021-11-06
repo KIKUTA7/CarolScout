@@ -101,9 +101,11 @@ public class CarolPfadfinder {
         dir1 = (direction+3) % 4;
         instructions[steps] = 'r';
         t1 = findInstructions0(playground,x,y,dir1,blocks,findX,findY,instructions,steps+1);
+        if(t1) return true;
         dir2 = (direction+1) % 4;
         instructions[steps] = 'l';
         t2 = findInstructions0(playground,x,y,dir2,blocks,findX,findY,instructions,steps+1);
+        if(t2) return true;
         instructions[steps] = 's';
         if(direction % 2 == 1)
         {
@@ -111,6 +113,7 @@ public class CarolPfadfinder {
             if(0 <= posy && posy <= playground[0].length - 1 && Math.abs(playground[posx][posy]-playground[x][y]) <= 1)
                 t3 = findInstructions0(playground,posx,y+(-1)*(direction-2),direction,blocks,findX,findY,instructions,steps + 1);
             else t3 = false;
+            if(t3) return true;
         }
         else
         {
@@ -118,6 +121,7 @@ public class CarolPfadfinder {
             if(0 <= posx && posx <= playground.length - 1 && Math.abs(playground[posx][posy]-playground[x][y]) <= 1)
             t3 = findInstructions0(playground,x+(-1)*(direction-1),posy,direction,blocks,findX,findY,instructions,steps + 1);
             else t3=false;
+            if(t3) return true;
         }
         instructions[steps] = 'n';
         if (direction % 2 == 1)
@@ -130,6 +134,7 @@ public class CarolPfadfinder {
                 t4 = findInstructions0(playground,x,y,direction,blocks,findX,findY,instructions,steps+1);
             }
             else t4 = false;
+            if(t4) return true;
 
         }
         else
@@ -142,6 +147,7 @@ public class CarolPfadfinder {
                 t4 = findInstructions0(playground,x,y,direction,blocks,findX,findY,instructions,steps+1);
             }
             else t4 = false;
+            if(t4) return true;
 
         }
         instructions [steps] = 'p';
@@ -155,6 +161,7 @@ public class CarolPfadfinder {
                 t5 = findInstructions0(playground,x,y,direction,blocks,findX,findY,instructions,steps+1);
             }
             else t5=false;
+            if(t5) return true;
 
         }
         else
@@ -167,9 +174,10 @@ public class CarolPfadfinder {
                 t5 = findInstructions0(playground,x,y,direction,blocks,findX,findY,instructions,steps+1);
             }
             else t5=false;
+            if(t5) return true;
 
         }
-        return t1 || t2 || t3 || t4 || t5;
+        return false;
 
     }
 

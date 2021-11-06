@@ -80,7 +80,7 @@ public class CarolPfadfinder {
         int steps = 0;
         int get = getMinimalStepsAndTurns(x,y,direction,findX,findY);
         int x0=x,y0=y,dir0=direction,blocks0=blocks;
-        char inst2 [] = new char[0];
+        char[] inst2 = new char[0];
         if(!findInstructions0(playground,x,y,direction,blocks,findX,findY,instructions,steps)) return false;
         x=x0; y=y0; direction=dir0; blocks=blocks0; steps=0;
             for (int i=instructions.length - 1;i>=get;i--)
@@ -103,6 +103,7 @@ public class CarolPfadfinder {
     }
     public static boolean findInstructions0(int[][] playground, int x, int y, int direction, int blocks, int findX, int findY, char[] instructions,int steps) {
         if(steps > instructions.length - 1) return false;
+        if(wasThereBefore(instructions,instructions.length)) return false;
         if(x==findX && y==findY && steps==instructions.length - 1) return true;
         if(x==findX && y==findY && steps<instructions.length - 1)
         {
@@ -118,30 +119,32 @@ public class CarolPfadfinder {
         instructions[steps] = 'r';
         if(lastTurnsAreUseless(instructions,steps+1)) t1=false;
         else t1 = findInstructions0(playground,x,y,dir1,blocks,findX,findY,instructions,steps+1);
-        if(t1) return true;
+
         dir2 = (direction+1) % 4;
         instructions[steps] = 'l';
         if(lastTurnsAreUseless(instructions,steps+1)) t2=false;
         else t2 = findInstructions0(playground,x,y,dir2,blocks,findX,findY,instructions,steps+1);
-        if(t2) return true;
+
         instructions[steps] = 's';
         if(direction % 2 == 1)
         {
             posy = y+(-1)*(direction-2);
             if(0 <= posy && posy <= playground[0].length - 1 && Math.abs(playground[posx][posy]-playground[x][y]) <= 1)
-                t3 = findInstructions0(playground,posx,y+(-1)*(direction-2),direction,blocks,findX,findY,instructions,steps + 1);
+                t3 = findInstructions0(playground,posx,posy,direction,blocks,findX,findY,instructions,steps + 1);
             else t3 = false;
-            if(t3) return true;
+
         }
         else
         {
             posx = x+(-1)*(direction-1);
             if(0 <= posx && posx <= playground.length - 1 && Math.abs(playground[posx][posy]-playground[x][y]) <= 1)
-            t3 = findInstructions0(playground,x+(-1)*(direction-1),posy,direction,blocks,findX,findY,instructions,steps + 1);
+            t3 = findInstructions0(playground,posx,posy,direction,blocks,findX,findY,instructions,steps + 1);
             else t3=false;
-            if(t3) return true;
+
         }
         instructions[steps] = 'n';
+        if(instructions[steps - 1]=='p') t4=false;
+        else {
         if (direction % 2 == 1)
         {
             posy = y+(-1)*(direction-2);
@@ -152,7 +155,7 @@ public class CarolPfadfinder {
                 t4 = findInstructions0(playground,x,y,direction,blocks,findX,findY,instructions,steps+1);
             }
             else t4 = false;
-            if(t4) return true;
+
 
         }
         else
@@ -165,10 +168,12 @@ public class CarolPfadfinder {
                 t4 = findInstructions0(playground,x,y,direction,blocks,findX,findY,instructions,steps+1);
             }
             else t4 = false;
-            if(t4) return true;
 
-        }
+
+        }}
         instructions [steps] = 'p';
+        if(instructions[steps-1]=='n') t5=false;
+        else{
         if(direction % 2 == 1)
         {
             posy = y+(-1)*(direction-2);
@@ -179,7 +184,7 @@ public class CarolPfadfinder {
                 t5 = findInstructions0(playground,x,y,direction,blocks,findX,findY,instructions,steps+1);
             }
             else t5=false;
-            return t5;
+
 
         }
         else
@@ -192,9 +197,10 @@ public class CarolPfadfinder {
                 t5 = findInstructions0(playground,x,y,direction,blocks,findX,findY,instructions,steps+1);
             }
             else t5=false;
-            return t5;
 
-        }
+
+        }}
+        return t1||t2||t3||t4||t5;
 
     }
 
@@ -219,8 +225,15 @@ public class CarolPfadfinder {
 //                {-1, -1, 9, 5, 3} //
 //        };
         int[][] playground = {{0}};
-        char [] k = new char [] {};
-
+        char [] k = new char [0] ;
+        char [] i = new char [1] ;
+        char [] l = new char [2] ;
+        l[0]='i';
+        i[0]='l';
+        l[1]='y';
+        k=i;
+        k=l;
+        System.out.println(k[0]);
         System.out.println(findInstructions(playground,0,0,1,0,0,0,k));
 //        int startX = 2;
 //        int startY = 1;

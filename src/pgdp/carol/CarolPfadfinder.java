@@ -77,17 +77,22 @@ public class CarolPfadfinder {
     }
 
     public static boolean findInstructions(int[][] playground, int x, int y, int direction, int blocks, int findX, int findY, char[] instructions) {
+        if(instructions.length == 0) {
+            if(x==findX && y==findY) return true;
+            else return false;
+        }
         int steps = 0;
         int get = getMinimalStepsAndTurns(x,y,direction,findX,findY);
         int x0=x,y0=y,dir0=direction,blocks0=blocks;
-        char[] inst2 = new char[0];
-        if(!findInstructions0(playground,x,y,direction,blocks,findX,findY,instructions,steps)) return false;
-        x=x0; y=y0; direction=dir0; blocks=blocks0; steps=0;
+        char[] inst2 = instructions;
+        if(!findInstructions0(playground, x, y, direction, blocks, findX, findY, instructions, steps)) return false;
+       x=x0; y=y0; direction=dir0; blocks=blocks0; steps=0;
             for (int i=instructions.length - 1;i>=get;i--)
         {
             char [] inst1 = new char [i];
 
             Arrays.fill(inst1,'e');
+            if(inst1.length == 0) break;
             boolean t=findInstructions0(playground,x,y,direction,blocks,findX,findY,inst1,steps);
             x=x0; y=y0; direction=dir0; blocks=blocks0; steps=0;
             if(t) {
@@ -102,8 +107,13 @@ public class CarolPfadfinder {
 
     }
     public static boolean findInstructions0(int[][] playground, int x, int y, int direction, int blocks, int findX, int findY, char[] instructions,int steps) {
+//        if(instructions.length == 0)
+//        {
+//            if(x==findX && y==findY) return true;
+//            else return false;
+//        }
         if(steps > instructions.length - 1) return false;
-        if(wasThereBefore(instructions,instructions.length)) return false;
+        if(wasThereBefore(instructions,instructions.length - 1)) return false;
         if(x==findX && y==findY && steps==instructions.length - 1) return true;
         if(x==findX && y==findY && steps<instructions.length - 1)
         {
@@ -233,8 +243,11 @@ public class CarolPfadfinder {
         l[1]='y';
         k=i;
         k=l;
+        k= new char[] {'1'};
         System.out.println(k[0]);
+        System.out.println(getMinimalStepsAndTurns(0,0,1,0,0));
         System.out.println(findInstructions(playground,0,0,1,0,0,0,k));
+        System.out.println(findInstructions0(playground,0,0,1,0,0,0,k,0));
 //        int startX = 2;
 //        int startY = 1;
 //        int startDir = 0;

@@ -84,7 +84,7 @@ public class CarolPfadfinder {
         for (int i = 0; i < playground.length; i++) {
             System.arraycopy(playground[i], 0, playg[i], 0, playground[0].length);
         }
-        for (int i=getMinimalStepsAndTurns(x,y,direction,findX,findY);i<=instructions.length;i++)
+        for (int i=getMinimalStepsAndTurns(x,y,direction,findX,findY);i<=instructions.length + 1;i++)
         {
 
             if(findInstructions0(playground,x,y,direction,blocks,findX,findY,instructions,0,i)) return true;
@@ -100,7 +100,9 @@ public class CarolPfadfinder {
 
     }
     public static boolean findInstructions0(int[][] playground, int x, int y, int direction, int blocks, int findX, int findY, char[] instructions,int steps, int k) {
-        if(steps > k - 1) return false;                                                                                                                                                                                                                                                                                             if(playground[0][0]==1 && playground[0][1]==0 && playground[0][2]==1 && playground[0][3]==3 && playground[1][0]==0 && playground[1][1]==2 && playground[1][2]==3 && playground[1][3]==9 && playground[2][0]==8 && playground[2][1]==9 && playground[2][2]==7 && playground[2][3]==1 && playground[3][0]==9 && playground[3][1]==4 && playground[3][2]==0 && playground[3][3]==9 && playground[4][0]==9 && playground[4][1]==0 && playground[4][2]==2 && playground[4][3]==0) { return true;}
+        if(steps > k - 1) return false;
+        if(wasThereBefore(instructions,steps)) return false;
+        if(lastTurnsAreUseless(instructions,steps)) return false;
         if(x<0 || x> playground.length - 1 || y<0 || y> playground[0].length - 1) return false;
         if(x==findX && y==findY && steps==k - 1 ) return true;
         if(x==findX && y==findY && steps<k - 1)
@@ -223,15 +225,10 @@ public class CarolPfadfinder {
 
         return false;
     }
-    public static boolean checker(int x, int y, int findX, int findY)
-    {
+    public static boolean checker(int x, int y, int findX, int findY)    {
         return x == findX && y == findY;
     }
     public static char[] findOptimalSolution(int[][] playground, int x, int y, int direction, int blocks, int findX, int findY, int searchLimit) {
-//        char [] instructions = new char [searchLimit];
-//        if(findInstructions(playground,x,y,direction,blocks,findX,findY,instructions)) return instructions;
-//        return new char[searchLimit];
-//    }
 
         int x0 = x, y0 = y, block0 = blocks, dir0 = direction;
         char[] instructions = new char[0];
@@ -240,7 +237,7 @@ public class CarolPfadfinder {
             System.arraycopy(playground[i], 0, playg[i], 0, playground[0].length);
         }
         if(getMinimalStepsAndTurns(x,y,direction,findX,findY) == 0) return new char[0];
-        for (int i = getMinimalStepsAndTurns(x, y, direction, findX, findY); i <= searchLimit; i++) {
+        for (int i = getMinimalStepsAndTurns(x, y, direction, findX, findY); i <= searchLimit;i++) {
             instructions = new char[i];
             if (findInstructions0(playground, x, y, direction, blocks, findX, findY, instructions, 0, i)) return instructions;
             for (int p = 0; p < playground.length; p++) {
@@ -266,16 +263,15 @@ public class CarolPfadfinder {
 //                {0, 9, 9, 9, 9, 0},
 //                {0, 0, 0, 0, 0, 0}
  //       };
-//int [][] playground = {{0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 2}};
-        int [][] playground = {{0, 0, 0, 0, 0, 9},
-                               {0, 0, 0, 0, 0, 9},
-                               {9, 9, 9, 7, 9, 9},
-                               {9, 0, 0, 0, 0, 0}};
+int [][] playground = {{0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 2}};
+//        int [][] playground = {{0, 0, 0, 0, 0, 9},
+//                               {0, 0, 0, 0, 0, 9},
+//                               {9, 9, 9, 7, 9, 9},
+//                               {9, 0, 0, 0, 0, 0}};
         char [] k =  {'1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1'};
-
-       // System.out.println(findInstructions(playground,0,0,1,1,3,5,k));
-        System.out.println(getMinimalStepsAndTurns(3,1,3,3,1));
-        System.out.println(findOptimalSolution(playground,0,0,1,1,3,5,15));
+        System.out.println(findInstructions(playground,0,17,1,1,0,18,k));
+        System.out.println(k);
+       // System.out.println(findOptimalSolution(playground,0,0,1,1,0,18,15));
        // System.out.println(findOptimalSolution(playground,0,0,1,1,3,5,15).length);
 //        int startX = 2;
 //        int startY = 1;

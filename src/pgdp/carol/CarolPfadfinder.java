@@ -119,13 +119,17 @@ public class CarolPfadfinder {
         instructions[steps] = 's';
         if (direction % 2 == 1) {
             posy = y + (-1) * (direction - 2);
-            if (0 <= posy && posy <= playground[0].length - 1 && Math.abs(playground[posx][posy] - playground[x][y]) <= 1)
+            if (0 <= posy && posy <= playground[0].length - 1 && 0<=posx && posx<= playground.length - 1
+                    && 0 <= y && y <= playground[0].length - 1 && 0<=x && x<= playground.length - 1
+                    && Math.abs(playground[posx][posy] - playground[x][y]) <= 1)
                 if(checker(posx,posy,findX,findY)) return true;
                 if(findInstructions0(playground, posx, posy, direction, blocks, findX, findY, instructions, steps + 1,k)) return true;
 
         } else {
             posx = x + (-1) * (direction - 1);
-            if (0 <= posx && posx <= playground.length - 1 && Math.abs(playground[posx][posy] - playground[x][y]) <= 1) {
+            if (0 <= posy && posy <= playground[0].length - 1 && 0<=posx && posx<= playground.length - 1
+                    && 0 <= y && y <= playground[0].length - 1 && 0<=x && x<= playground.length - 1
+                    && Math.abs(playground[posx][posy] - playground[x][y]) <= 1) {
                 if(checker(posx,posy,findX,findY)) return true;
                 if(findInstructions0(playground, posx, posy, direction, blocks, findX, findY, instructions, steps + 1,k)) return true;}
 
@@ -135,7 +139,9 @@ public class CarolPfadfinder {
         if (direction % 2 == 1)
         {
             posy = y+(-1)*(direction-2);
-            if(playground[x][y] != -1 && blocks < 10 && 0 <= posy && posy <= playground[0].length - 1 && playground[posx][posy] > -1)
+            if (0 <= posy && posy <= playground[0].length - 1 && 0<=posx && posx <=playground.length - 1
+                    && 0 <= y && y <= playground[0].length - 1 && 0<=x && x <=playground.length - 1
+                    && playground[x][y] != -1 && blocks < 10 && playground[posx][posy] > -1)
             {
                 playground[posx][posy]--;
                 blocks++;
@@ -146,7 +152,9 @@ public class CarolPfadfinder {
         else
         {
             posx = x+(-1)*(direction-1);
-            if(playground[x][y] != -1 && blocks < 10 && 0 <= posx && posx <= playground.length - 1 && playground[posx][posy] > -1)
+            if(    0 <= posy && posy <= playground[0].length - 1 && 0<=posx && posx <=playground.length - 1
+                    && 0 <= y && y <= playground[0].length - 1 && 0<=x && x <=playground.length - 1
+                    && playground[x][y] != -1 && blocks < 10 && playground[posx][posy] > -1)
             {
                 playground[posx][posy]--;
                 blocks++;
@@ -159,7 +167,9 @@ public class CarolPfadfinder {
         if(direction % 2 == 1)
         {
             posy = y+(-1)*(direction-2);
-            if(playground[x][y] != -1 && blocks >= 1 && 0 <= posy && posy <= playground[0].length - 1 && playground[posx][posy] < 9)
+            if(0 <= posy && posy <= playground[0].length - 1 && 0 <= posx && posx <=playground.length - 1
+                    && 0 <= y && y <= playground[0].length - 1 && 0 <= x && posx <=playground.length - 1
+                    && playground[x][y] != -1 && blocks >= 1 &&   playground[posx][posy] < 9)
             {
                 playground[posx][posy]++;
                 blocks--;
@@ -172,7 +182,9 @@ public class CarolPfadfinder {
         else
         {
             posx = x+(-1)*(direction-1);
-            if(playground[x][y] != -1 && blocks >= 1 && 0 <= posx && posx <= playground.length - 1 && playground[posx][posy] < 9)
+            if(0 <= posy && posy <= playground[0].length - 1 && 0<=posx && posx <=playground.length - 1
+                    && 0 <= y && y <= playground[0].length - 1 && 0<=x && posx <=playground.length - 1
+                    && playground[x][y] != -1 && blocks >= 1 &&   playground[posx][posy] < 9)
             {
                 playground[posx][posy]++;
                 blocks--;

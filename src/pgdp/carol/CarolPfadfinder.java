@@ -232,9 +232,13 @@ public class CarolPfadfinder {
 //        if(findInstructions(playground,x,y,direction,blocks,findX,findY,instructions)) return instructions;
 //        return new char[searchLimit];
 //    }
+        char [] instructions = new char [searchLimit];
+
+        if(findInstructions(playground,x,y,direction,blocks,findX,findY,instructions)) return instructions;
+
 
         int x0 = x, y0 = y, block0 = blocks, dir0 = direction;
-        char[] instructions = new char[0];
+        instructions = new char[0];
         int[][] playg = new int[playground.length][playground[0].length];
         for (int i = 0; i < playground.length; i++) {
             System.arraycopy(playground[i], 0, playg[i], 0, playground[0].length);

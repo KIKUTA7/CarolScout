@@ -228,6 +228,11 @@ public class CarolPfadfinder {
         return x == findX && y == findY;
     }
     public static char[] findOptimalSolution(int[][] playground, int x, int y, int direction, int blocks, int findX, int findY, int searchLimit) {
+        char [] instructions = new char [searchLimit];
+        if(findInstructions(playground,x,y,direction,blocks,findX,findY,instructions)) return instructions;
+        return new char[searchLimit];
+    }
+
 //        int x0=x,y0=y,block0=blocks,dir0=direction;
 //        char [] instructions = new char [0];
 //        int  [][] playg = new int [playground.length][playground[0].length];
@@ -247,12 +252,7 @@ public class CarolPfadfinder {
 //        }
 //
 //        return instructions;
-//    }
-    char [] instructions = new char [searchLimit];
-    if(findInstructions(playground,x,y,direction,blocks,findX,findY,instructions)) return instructions;
-    return null;
-    }
-
+//
     public static void main(String[] args) {
         /*
          * You can change this main-Method as you want. This is not being tested.
@@ -278,8 +278,8 @@ public class CarolPfadfinder {
 
        // System.out.println(findInstructions(playground,0,0,1,1,3,5,k));
        // System.out.println(getMinimalStepsAndTurns(0,0,1,3,5));
-        System.out.println(findOptimalSolution(playground,0,0,1,1,3,5,16));
-        System.out.println(findOptimalSolution(playground,0,0,1,1,3,5,16).length);
+        System.out.println(findOptimalSolution(playground,0,0,1,1,3,5,15));
+       // System.out.println(findOptimalSolution(playground,0,0,1,1,3,5,15).length);
 //        int startX = 2;
 //        int startY = 1;
 //        int startDir = 0;

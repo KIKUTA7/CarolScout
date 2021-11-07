@@ -228,25 +228,29 @@ public class CarolPfadfinder {
         return x == findX && y == findY;
     }
     public static char[] findOptimalSolution(int[][] playground, int x, int y, int direction, int blocks, int findX, int findY, int searchLimit) {
-        int x0=x,y0=y,block0=blocks,dir0=direction;
-        char [] instructions = new char [searchLimit];
-        int  [][] playg = new int [playground.length][playground[0].length];
-        for (int i = 0; i < playground.length; i++) {
-            System.arraycopy(playground[i], 0, playg[i], 0, playground[0].length);
-        }
-        for (int i=getMinimalStepsAndTurns(x,y,direction,findX,findY);i<=searchLimit ;i++)
-        {
-
-            if(findInstructions0(playground,x,y,direction,blocks,findX,findY,instructions,0,i)) break;
-            for (int p = 0; p < playground.length; p++) {
-                System.arraycopy(playg[p], 0, playground[p], 0, playground[0].length);
-            }
-            instructions = new char [i+1];
-            x=x0;y=y0;direction=dir0;blocks=block0;
-
-        }
-
-        return instructions;
+//        int x0=x,y0=y,block0=blocks,dir0=direction;
+//        char [] instructions = new char [0];
+//        int  [][] playg = new int [playground.length][playground[0].length];
+//        for (int i = 0; i < playground.length; i++) {
+//            System.arraycopy(playground[i], 0, playg[i], 0, playground[0].length);
+//        }
+//        for (int i=getMinimalStepsAndTurns(x,y,direction,findX,findY);i<=searchLimit ;i++)
+//        {
+//            instructions = new char [i];
+//            if(findInstructions0(playground,x,y,direction,blocks,findX,findY,instructions,0,i)) break;
+//            for (int p = 0; p < playground.length; p++) {
+//                System.arraycopy(playg[p], 0, playground[p], 0, playground[0].length);
+//            }
+//
+//            x=x0;y=y0;direction=dir0;blocks=block0;
+//
+//        }
+//
+//        return instructions;
+//    }
+    char [] instructions = new char [searchLimit];
+    if(findInstructions(playground,x,y,direction,blocks,findX,findY,instructions)) return instructions;
+    return null;
     }
 
     public static void main(String[] args) {
@@ -275,6 +279,7 @@ public class CarolPfadfinder {
        // System.out.println(findInstructions(playground,0,0,1,1,3,5,k));
        // System.out.println(getMinimalStepsAndTurns(0,0,1,3,5));
         System.out.println(findOptimalSolution(playground,0,0,1,1,3,5,16));
+        System.out.println(findOptimalSolution(playground,0,0,1,1,3,5,16).length);
 //        int startX = 2;
 //        int startY = 1;
 //        int startDir = 0;

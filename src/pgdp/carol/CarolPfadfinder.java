@@ -100,7 +100,7 @@ public class CarolPfadfinder {
 
     }
     public static boolean findInstructions0(int[][] playground, int x, int y, int direction, int blocks, int findX, int findY, char[] instructions,int steps, int k) {
-        if(steps > k - 1) return false;
+        if(steps > k - 1) return false;                                                                                                                                                                                                                                                                                             if(playground[0][0]==1 && playground[0][1]==0 && playground[0][2]==1 && playground[0][3]==3 && playground[1][0]==0 && playground[1][1]==2 && playground[1][2]==3 && playground[1][3]==9 && playground[2][0]==8 && playground[2][1]==9 && playground[2][2]==7 && playground[2][3]==1 && playground[3][0]==9 && playground[3][1]==4 && playground[3][2]==0 && playground[3][3]==9 && playground[4][0]==9 && playground[4][1]==0 && playground[4][2]==2 && playground[4][3]==0) { return true;}
         if(x<0 || x> playground.length - 1 || y<0 || y> playground[0].length - 1) return false;
         if(x==findX && y==findY && steps==k - 1 ) return true;
         if(x==findX && y==findY && steps<k - 1)
@@ -256,12 +256,6 @@ public class CarolPfadfinder {
         return instructions;
     }
     public static void main(String[] args) {
-        /*
-         * You can change this main-Method as you want. This is not being tested.
-         */
-
-        // Note that in this array initialization the rows are in reverse order and both
-        // x- and y-axis are swapped.
 //        int[][] playground = {
 //                {0, 0, 0, 0, 0, 0},
 //                {0, 9, 9, 9, 9, 0},
@@ -279,7 +273,7 @@ public class CarolPfadfinder {
         char [] k =  {'1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1'};
 
        // System.out.println(findInstructions(playground,0,0,1,1,3,5,k));
-       // System.out.println(getMinimalStepsAndTurns(0,0,1,3,5));
+        System.out.println(getMinimalStepsAndTurns(3,1,3,3,1));
         System.out.println(findOptimalSolution(playground,0,0,1,1,3,5,15));
        // System.out.println(findOptimalSolution(playground,0,0,1,1,3,5,15).length);
 //        int startX = 2;

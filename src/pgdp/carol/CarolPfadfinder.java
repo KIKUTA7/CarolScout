@@ -80,10 +80,23 @@ public class CarolPfadfinder {
 
         int x0=x,y0=y,block0=blocks,dir0=direction;
         Arrays.fill(instructions,'e');
+        int  [][] playg = new int [playground.length][playground[0].length];
+        for (int i = 0; i < playground.length; i++) {
+            for (int j = 0; j < playground[0].length; j++) {
+                playg[i][j]=playground[i][j];
+            }
+        }
         for (int i=getMinimalStepsAndTurns(x,y,direction,findX,findY);i<=instructions.length;i++)
         {
-            if(findInstructions0(playground,x,y,direction,blocks,findX,findY,instructions,0,i)) {return true;}
+
+            if(findInstructions0(playground,x,y,direction,blocks,findX,findY,instructions,0,i)) return true;
+            for (int p = 0; p < playground.length; p++) {
+                for (int j = 0; j < playground[0].length; j++) {
+                    playground[p][j]=playg[p][j];
+                }
+            }
             x=x0;y=y0;direction=dir0;blocks=block0;
+
         }
         Arrays.fill(instructions,'e');
         return false;
@@ -102,16 +115,32 @@ public class CarolPfadfinder {
         }
 
         int dir1,dir2,posy = y,posx = x,pos1x=x,pos1y=y;
+        int[][] playg = new int [playground.length][playground[0].length];
+        for (int i = 0; i < playground.length; i++) {
+            for (int j = 0; j < playground[0].length; j++) {
+                playg[i][j]=playground[i][j];
+            }
+        }
         dir1 = (direction+3) % 4;
         instructions[steps] = 'r';
 
         if(findInstructions0(playground,x,y,dir1,blocks,findX,findY,instructions,steps+1,k)) return true;
+        for (int p = 0; p < playground.length; p++) {
+            for (int j = 0; j < playground[0].length; j++) {
+                playground[p][j]=playg[p][j];
+            }
+        }
         x=pos1x;
         y=pos1y;
         dir2 = (direction+1) % 4;
         instructions[steps] = 'l';
 
         if(findInstructions0(playground,x,y,dir2,blocks,findX,findY,instructions,steps+1,k)) return true;
+        for (int p = 0; p < playground.length; p++) {
+            for (int j = 0; j < playground[0].length; j++) {
+                playground[p][j]=playg[p][j];
+            }
+        }
         x=pos1x;
         y=pos1y;
         instructions[steps] = 's';
@@ -121,7 +150,9 @@ public class CarolPfadfinder {
                     && 0 <= y && y <= playground[0].length - 1 && 0<=x && x<= playground.length - 1
                     && Math.abs(playground[posx][posy] - playground[x][y]) <= 1){
                 if(checker(posx,posy,findX,findY)) return true;
-                if(findInstructions0(playground, posx, posy, direction, blocks, findX, findY, instructions, steps + 1,k)) return true;}
+                if(findInstructions0(playground, posx, posy, direction, blocks, findX, findY, instructions, steps + 1,k)) return true;
+
+            }
 
         } else {
             posx = x + (-1) * (direction - 1);
@@ -129,8 +160,15 @@ public class CarolPfadfinder {
                     && 0 <= y && y <= playground[0].length - 1 && 0<=x && x<= playground.length - 1
                     && Math.abs(playground[posx][posy] - playground[x][y]) <= 1) {
                 if(checker(posx,posy,findX,findY)) return true;
-                if(findInstructions0(playground, posx, posy, direction, blocks, findX, findY, instructions, steps + 1,k)) return true;}
+                if(findInstructions0(playground, posx, posy, direction, blocks, findX, findY, instructions, steps + 1,k)) return true;
 
+            }
+
+        }
+        for (int p = 0; p < playground.length; p++) {
+            for (int j = 0; j < playground[0].length; j++) {
+                playground[p][j]=playg[p][j];
+            }
         }
         x=pos1x;
         y=pos1y;
@@ -147,6 +185,7 @@ public class CarolPfadfinder {
                 blocks++;
 
                 if(findInstructions0(playground,x,y,direction,blocks,findX,findY,instructions,steps+1,k)) return true;
+
             }
         }
         else
@@ -160,8 +199,14 @@ public class CarolPfadfinder {
                 blocks++;
 
                 if(findInstructions0(playground,x,y,direction,blocks,findX,findY,instructions,steps+1,k)) return true;
+
             }
 
+        }
+        for (int p = 0; p < playground.length; p++) {
+            for (int j = 0; j < playground[0].length; j++) {
+                playground[p][j]=playg[p][j];
+            }
         }
         x=pos1x;
         y=pos1y;
@@ -178,10 +223,12 @@ public class CarolPfadfinder {
                 blocks--;
 
                 return findInstructions0(playground, x, y, direction, blocks, findX, findY, instructions, steps + 1, k);
+
             }
 
 
         }
+
         else
         {
             posx = x+(-1)*(direction-1);
@@ -196,6 +243,7 @@ public class CarolPfadfinder {
             }
 
         }
+
         return false;
     }
     public static boolean checker(int x, int y, int findX, int findY)
@@ -224,17 +272,16 @@ public class CarolPfadfinder {
 //                {0, 9, 9, 9, 9, 0},
 //                {0, 0, 0, 0, 0, 0}
 //        };
-       int[][] playground = {{0,0,9},
-               {9,1,9},
-               {9,0,0}};
-//        int [][] playground = {{0, 0, 0, 0, 0, 9},
-//                {0, 0, 0, 0, 0, 9},
-//                {9, 9, 9, 7, 9, 9},
-//                {9, 0, 0, 0, 0, 0}};
-        char [] k = new char [] {'1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1'};
+//       int[][] playground = {{0,0,0},
+//                             {0,2,0},
+//                             {0,0,0}};
+        int [][] playground = {{0, 0, 0, 0, 0, 9},
+                {0, 0, 0, 0, 0, 9},
+                {9, 9, 9, 7, 9, 9},
+                {9, 0, 0, 0, 0, 0}};
+        char [] k = new char [] {'1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1'};
 
-        System.out.println(findInstructions(playground,0,0,1,2,2,2,k));
-        System.out.println(getMinimalStepsAndTurns(3,1,0,3,4));
+        System.out.println(findInstructions(playground,0,0,1,0,3,5,k));
         System.out.println(k);
 //        int startX = 2;
 //        int startY = 1;

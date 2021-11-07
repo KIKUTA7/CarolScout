@@ -84,8 +84,6 @@ public class CarolPfadfinder {
         {
             if(findInstructions0(playground,x,y,direction,blocks,findX,findY,instructions,0,i)) {return true;}
             x=x0;y=y0;direction=dir0;blocks=block0;
-
-
         }
         return false;
 
@@ -121,9 +119,9 @@ public class CarolPfadfinder {
             posy = y + (-1) * (direction - 2);
             if (0 <= posy && posy <= playground[0].length - 1 && 0<=posx && posx<= playground.length - 1
                     && 0 <= y && y <= playground[0].length - 1 && 0<=x && x<= playground.length - 1
-                    && Math.abs(playground[posx][posy] - playground[x][y]) <= 1)
+                    && Math.abs(playground[posx][posy] - playground[x][y]) <= 1){
                 if(checker(posx,posy,findX,findY)) return true;
-                if(findInstructions0(playground, posx, posy, direction, blocks, findX, findY, instructions, steps + 1,k)) return true;
+                if(findInstructions0(playground, posx, posy, direction, blocks, findX, findY, instructions, steps + 1,k)) return true;}
 
         } else {
             posx = x + (-1) * (direction - 1);
@@ -152,7 +150,7 @@ public class CarolPfadfinder {
         else
         {
             posx = x+(-1)*(direction-1);
-            if(    0 <= posy && posy <= playground[0].length - 1 && 0<=posx && posx <=playground.length - 1
+            if( 0 <= posy && posy <= playground[0].length - 1 && 0<=posx && posx <=playground.length - 1
                     && 0 <= y && y <= playground[0].length - 1 && 0<=x && x <=playground.length - 1
                     && playground[x][y] != -1 && blocks < 10 && playground[posx][posy] > -1)
             {
@@ -212,18 +210,22 @@ public class CarolPfadfinder {
 
         // Note that in this array initialization the rows are in reverse order and both
         // x- and y-axis are swapped.
-        int[][] playground = {
-                {0, 1, -1, -1, -1},
-                {1, 0, -1, -1, -1},
-                {-1, -1, 7, 8, 9},
-                {-1, -1, 8, 3, 4},
-                {-1, -1, 9, 4, 3}
-        };
-     //   int[][] playground = {{0}};
-        char [] k = new char [] {'1','1','1','1','1'};
+//        int[][] playground = {
+//                {0, 0, 0, 0, 0, 0},
+//                {0, 9, 9, 9, 9, 0},
+//                {0, 0, 9, 9, 0, 0},
+//                {0, 0, 9, 9, 0, 0},
+//                {0, 0, 9, 9, 0, 0},
+//                {0, 9, 9, 9, 9, 0},
+//                {0, 0, 0, 0, 0, 0}
+//        };
+       int[][] playground = {{9,9,9},
+               {9,0,9},
+               {9,9,9}};
+        char [] k = new char [] {'1','1','1','1','1','1','1','1','1','1'};
 
-        System.out.println(findInstructions(playground,0,0,1,1,1,1,k));
-        System.out.println(getMinimalStepsAndTurns(0,0,1,1,1));
+        System.out.println(findInstructions(playground,1,1,0,10,2,2,k));
+        System.out.println(getMinimalStepsAndTurns(3,1,0,3,4));
         System.out.println(k);
 //        int startX = 2;
 //        int startY = 1;

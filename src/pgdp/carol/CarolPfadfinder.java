@@ -85,6 +85,7 @@ public class CarolPfadfinder {
             if(findInstructions0(playground,x,y,direction,blocks,findX,findY,instructions,0,i)) {return true;}
             x=x0;y=y0;direction=dir0;blocks=block0;
         }
+        Arrays.fill(instructions,'e');
         return false;
 
 
@@ -101,7 +102,6 @@ public class CarolPfadfinder {
         }
 
         int dir1,dir2,posy = y,posx = x;
-        boolean t1,t2,t3,t4,t5;
         dir1 = (direction+3) % 4;
         instructions[steps] = 'r';
         if(checker(x,y,findX,findY)) return true;
@@ -132,7 +132,7 @@ public class CarolPfadfinder {
                 if(findInstructions0(playground, posx, posy, direction, blocks, findX, findY, instructions, steps + 1,k)) return true;}
 
         }
-
+        posx = x; posy = y;
         instructions[steps] = 'n';
         if (direction % 2 == 1)
         {
@@ -161,6 +161,7 @@ public class CarolPfadfinder {
             }
 
         }
+        posx = x; posy = y;
         instructions [steps] = 'p';
         if(direction % 2 == 1)
         {

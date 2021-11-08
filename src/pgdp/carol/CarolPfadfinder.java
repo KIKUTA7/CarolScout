@@ -78,30 +78,44 @@ public class CarolPfadfinder {
 
     public static boolean findInstructions(int[][] playground, int x, int y, int direction, int blocks, int findX, int findY, char[] instructions) {
 
-//        int x0=x,y0=y,block0=blocks,dir0=direction;
-//        Arrays.fill(instructions,'e');
-//        int  [][] playg = new int [playground.length][playground[0].length];
-//        for (int i = 0; i < playground.length; i++) {
-//            System.arraycopy(playground[i], 0, playg[i], 0, playground[0].length);
-//        }
-//        for (int i=getMinimalStepsAndTurns(x,y,direction,findX,findY);i<=instructions.length;i++)
-//        {
-//
-//            if(findInstructions0(playground,x,y,direction,blocks,findX,findY,instructions,0,i)) return true;
-//            for (int p = 0; p < playground.length; p++) {
-//                System.arraycopy(playg[p], 0, playground[p], 0, playground[0].length);
-//            }
-//            x=x0;y=y0;direction=dir0;blocks=block0;
-//
-//        }
-        instructions = new char [140];
-        return findInstructions0(playground,x,y,direction,blocks,findX,findY,instructions,0, instructions.length);
-  //      return false;
+        int x0=x,y0=y,block0=blocks,dir0=direction;
+        Arrays.fill(instructions,'e');
+        int  [][] playg = new int [playground.length][playground[0].length];
+        for (int i = 0; i < playground.length; i++) {
+            System.arraycopy(playground[i], 0, playg[i], 0, playground[0].length);
+        }
+        for (int i=instructions.length;i>=getMinimalStepsAndTurns(x,y,direction,findX,findY);i--)
+        {
+
+            if(findInstructions0(playground,x,y,direction,blocks,findX,findY,instructions,0,i)) {
+                for (int p = 0; p < playground.length; p++) {
+                    System.arraycopy(playg[p], 0, playground[p], 0, playground[0].length);
+                }
+                x = x0;
+                y = y0;
+                direction = dir0;
+                blocks = block0;
+            }
+            else {
+                for (int p = 0; p < playground.length; p++) {
+                    System.arraycopy(playg[p], 0, playground[p], 0, playground[0].length);
+                }
+                x = x0;
+                y = y0;
+                direction = dir0;
+                blocks = block0;
+                return findInstructions0(playground,x,y,direction,blocks,findX,findY,instructions,0,i+1);
+            }
+        }
+//        instructions = new char [20];
+//        return findInstructions0(playground,x,y,direction,blocks,findX,findY,instructions,0, instructions.length);
+      return false;
 
 
     }
     public static boolean findInstructions0(int[][] playground, int x, int y, int direction, int blocks, int findX, int findY, char[] instructions,int steps, int k) {
         if(steps > k - 1) return false;
+        if(x<0 || x> playground.length - 1 || y<0 || y> playground[0].length - 1) return false;
         if(x==findX && y==findY && steps==k - 1 ) return true;
         if(x==findX && y==findY && steps<k - 1)
         {
@@ -110,7 +124,6 @@ public class CarolPfadfinder {
             }
             return true;
         }
-        if(x<0 || x> playground.length - 1 || y<0 || y> playground[0].length - 1) return false;
         if(lastTurnsAreUseless(instructions,steps)) return false;
         if (steps>=1 && instructions[steps - 1]=='s' && wasThereBefore(instructions,steps)) {
             if(direction % 2==1) y=y+(direction - 2);

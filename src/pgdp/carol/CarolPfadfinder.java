@@ -248,7 +248,7 @@ public class CarolPfadfinder {
             blocks = block0;
 
         }
-        if(instructions.length==0) return new char[0];
+        if(instructions.length==0) return null;
         return instructions;
     }
     public static void main(String[] args) {

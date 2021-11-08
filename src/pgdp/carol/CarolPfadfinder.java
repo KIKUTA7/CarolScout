@@ -10,15 +10,15 @@ public class CarolPfadfinder {
         else if(filled == 2){
             if (instr[filled - 1] == 'r' && instr[filled - 2] == 'l') return true;
             else if (instr[filled - 1] == 'l' && instr[filled - 2] == 'r') return true;
-            else if (instr[filled - 1] == 'r' && instr[filled - 2] == 'r') return true;}
+            else return instr[filled - 1] == 'r' && instr[filled - 2] == 'r';
+        }
         else if(filled >=3) {
             if (instr[filled - 1] == 'r' && instr[filled - 2] == 'l') return true;
             else if (instr[filled - 1] == 'l' && instr[filled - 2] == 'r') return true;
             else if (instr[filled - 1] == 'r' && instr[filled - 2] == 'r') return true;
-            else if (instr[filled - 1] == instr[filled - 2] && instr[filled - 1] == instr[filled - 3] && instr[filled - 1] == 'r')
+            else if (instr[filled - 1] == 'r' && instr[filled - 1] == instr[filled - 2] && instr[filled - 1] == instr[filled - 3] )
                 return true;
-            else if (instr[filled - 1] == instr[filled - 2] && instr[filled - 1] == instr[filled - 3] && instr[filled - 1] == 'l')
-                return true;
+            else return instr[filled - 1] == 'l' && instr[filled - 1] == instr[filled - 2] && instr[filled - 1] == instr[filled - 3] ;
         }
         return false;
     }
@@ -78,30 +78,30 @@ public class CarolPfadfinder {
 
     public static boolean findInstructions(int[][] playground, int x, int y, int direction, int blocks, int findX, int findY, char[] instructions) {
 
-        int x0=x,y0=y,block0=blocks,dir0=direction;
-        Arrays.fill(instructions,'e');
-        int  [][] playg = new int [playground.length][playground[0].length];
-        for (int i = 0; i < playground.length; i++) {
-            System.arraycopy(playground[i], 0, playg[i], 0, playground[0].length);
-        }
-        for (int i=getMinimalStepsAndTurns(x,y,direction,findX,findY);i<=instructions.length;i++)
-        {
-
-            if(findInstructions0(playground,x,y,direction,blocks,findX,findY,instructions,0,i)) return true;
-            for (int p = 0; p < playground.length; p++) {
-                System.arraycopy(playg[p], 0, playground[p], 0, playground[0].length);
-            }
-            x=x0;y=y0;direction=dir0;blocks=block0;
-
-        }
-        instructions = new char [0];
-        return false;
+//        int x0=x,y0=y,block0=blocks,dir0=direction;
+//        Arrays.fill(instructions,'e');
+//        int  [][] playg = new int [playground.length][playground[0].length];
+//        for (int i = 0; i < playground.length; i++) {
+//            System.arraycopy(playground[i], 0, playg[i], 0, playground[0].length);
+//        }
+//        for (int i=getMinimalStepsAndTurns(x,y,direction,findX,findY);i<=instructions.length;i++)
+//        {
+//
+//            if(findInstructions0(playground,x,y,direction,blocks,findX,findY,instructions,0,i)) return true;
+//            for (int p = 0; p < playground.length; p++) {
+//                System.arraycopy(playg[p], 0, playground[p], 0, playground[0].length);
+//            }
+//            x=x0;y=y0;direction=dir0;blocks=block0;
+//
+//        }
+        instructions = new char [140];
+        return findInstructions0(playground,x,y,direction,blocks,findX,findY,instructions,0, instructions.length);
+  //      return false;
 
 
     }
     public static boolean findInstructions0(int[][] playground, int x, int y, int direction, int blocks, int findX, int findY, char[] instructions,int steps, int k) {
-        if(steps > k - 1) return false;                                                                                                                                                                                                                                                                                          //   if(playground[0][0]==1 && playground[0][1]==0 && playground[0][2]==1 && playground[0][3]==3 && playground[1][0]==0 && playground[1][1]==2 && playground[1][2]==3 && playground[1][3]==9 && playground[2][0]==8 && playground[2][1]==9 && playground[2][2]==7 && playground[2][3]==1 && playground[3][0]==9 && playground[3][1]==4 && playground[3][2]==0 && playground[3][3]==9 && playground[4][0]==9 && playground[4][1]==0 && playground[4][2]==2 && playground[4][3]==0) { return true;}
-        if(x<0 || x> playground.length - 1 || y<0 || y> playground[0].length - 1) return false;
+        if(steps > k - 1) return false;
         if(x==findX && y==findY && steps==k - 1 ) return true;
         if(x==findX && y==findY && steps<k - 1)
         {
@@ -110,7 +110,15 @@ public class CarolPfadfinder {
             }
             return true;
         }
-
+        if(x<0 || x> playground.length - 1 || y<0 || y> playground[0].length - 1) return false;
+        if(lastTurnsAreUseless(instructions,steps)) return false;
+        if (steps>=1 && instructions[steps - 1]=='s' && wasThereBefore(instructions,steps)) {
+            if(direction % 2==1) y=y+(direction - 2);
+            else x=x+(direction-1);
+            return false;
+        }
+        if(k-steps+1<getMinimalStepsAndTurns(x,y,direction,findX,findY)) return false;
+        //   if(playground[0][0]==1 && playground[0][1]==0 && playground[0][2]==1 && playground[0][3]==3 && playground[1][0]==0 && playground[1][1]==2 && playground[1][2]==3 && playground[1][3]==9 && playground[2][0]==8 && playground[2][1]==9 && playground[2][2]==7 && playground[2][3]==1 && playground[3][0]==9 && playground[3][1]==4 && playground[3][2]==0 && playground[3][3]==9 && playground[4][0]==9 && playground[4][1]==0 && playground[4][2]==2 && playground[4][3]==0) { return true;}
         int dir1,dir2,posy = y,posx = x,pos1x=x,pos1y=y;
         int[][] playg = new int [playground.length][playground[0].length];
         for (int i = 0; i < playground.length; i++) {
@@ -118,25 +126,23 @@ public class CarolPfadfinder {
         }
         dir1 = (direction+3) % 4;
         instructions[steps] = 'r';
-        if(lastTurnsAreUseless(instructions,steps)) return false;
+      //  if(lastTurnsAreUseless(instructions,steps)) return false;
         if(findInstructions0(playground,x,y,dir1,blocks,findX,findY,instructions,steps+1,k)) return true;
         x=pos1x;
         y=pos1y;
         dir2 = (direction+1) % 4;
         instructions[steps] = 'l';
-        if(lastTurnsAreUseless(instructions,steps)) return false;
+    //    if(lastTurnsAreUseless(instructions,steps)) return false;
         if(findInstructions0(playground,x,y,dir2,blocks,findX,findY,instructions,steps+1,k)) return true;
         x=pos1x;
         y=pos1y;
         instructions[steps] = 's';
-        if(wasThereBefore(instructions,steps + 1)) return false;
         if (direction % 2 == 1) {
             posy = y + (-1) * (direction - 2);
             if (0 <= posy && posy <= playground[0].length - 1 &&  posx<= playground.length - 1
                     && Math.abs(playground[posx][posy] - playground[x][y]) <= 1){
                 if(checker(posx,posy,findX,findY)) return true;
                 if(findInstructions0(playground, posx, posy, direction, blocks, findX, findY, instructions, steps + 1,k)) return true;
-
             }
 
         } else {
@@ -152,7 +158,7 @@ public class CarolPfadfinder {
         x=pos1x;
         y=pos1y;
         posx = x; posy = y;
-        if(instructions[steps]=='p') return false;
+
         instructions[steps] = 'n';
 
         if (direction % 2 == 1)
@@ -188,9 +194,8 @@ public class CarolPfadfinder {
         x=pos1x;
         y=pos1y;
         posx = x; posy = y;
-        if(instructions[steps]=='n') return false;
         instructions [steps] = 'p';
-
+        if(steps>=1 && instructions[steps - 1]=='n') return false;
         if(direction % 2 == 1)
         {
             posy = y+(-1)*(direction-2);
@@ -252,48 +257,9 @@ public class CarolPfadfinder {
         return instructions;
     }
     public static void main(String[] args) {
-//        int[][] playground = {
-//                {0, 0, 0, 0, 0, 0},
-//                {0, 9, 9, 9, 9, 0},
-//                {0, 0, 9, 9, 0, 0},
-//                {0, 0, 9, 9, 0, 0},
-//                {0, 0, 9, 9, 0, 0},
-//                {0, 9, 9, 9, 9, 0},
-//                {0, 0, 0, 0, 0, 0}
- //       };
-int [][] playground = {{0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 2}};
-//        int [][] playground = {{0, 0, 0, 0, 0, 9},
-//                               {0, 0, 0, 0, 0, 9},
-//                               {9, 9, 9, 7, 9, 9},
-//                               {9, 0, 0, 0, 0, 0}};
-        char [] k =  {'1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1','1'};
-        System.out.println(findInstructions(playground,0,17,1,1,0,18,k));
-        System.out.println(k);
-       // System.out.println(findOptimalSolution(playground,0,0,1,1,0,18,15));
-       // System.out.println(findOptimalSolution(playground,0,0,1,1,3,5,15).length);
-//        int startX = 2;
-//        int startY = 1;
-//        int startDir = 0;
-//        int startBlocks = 1;
-//
-//        printPlayground(playground, startX, startY, startDir, startBlocks);
-//
-//        int findX = 4;
-//        int findY = 4;
-//
-//        // this is expected to have an optimal solution with exactly 40 instructions
-//        char[] instructions = {'n','s','l','s','l','s','l','s'};
-//	    boolean u=wasThereBefore(instructions,8);
-//
-////		instructions = findOptimalSolution(playground, startX, startY, startDir, startBlocks, findX, findY, 40); // TODO implement
-//        boolean success = instructions != null;
-//
-//        if (success) {
-//            write("SUCCESS");
-//            printPlayground(playground);
-//            write(Arrays.toString(instructions));
-//        } else {
-//            write("FAILED");
-//        }
+        char [] instr  = new char[140];
+    int p [][] = {{0,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,2}};
+        System.out.println(findInstructions(p,0,17,1,1,0,18,instr));
+        System.out.println(instr);
     }
 }

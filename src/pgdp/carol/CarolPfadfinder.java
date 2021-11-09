@@ -259,28 +259,29 @@ public class CarolPfadfinder {
     }
     public static char[] findOptimalSolution(int[][] playground, int x, int y, int direction, int blocks, int findX, int findY, int searchLimit) {
 
-        int x0 = x, y0 = y, block0 = blocks, dir0 = direction;
-        char[] instructions = new char[0];
-        int[][] playg = new int[playground.length][playground[0].length];
-        for (int i = 0; i < playground.length; i++) {
-            System.arraycopy(playground[i], 0, playg[i], 0, playground[0].length);
-        }
-        if(getMinimalStepsAndTurns(x,y,direction,findX,findY) == 0) return new char[0];
-        for (int i = getMinimalStepsAndTurns(x, y, direction, findX, findY);i<= searchLimit;i++) {
-            instructions = new char[i];
-            if (findInstructions0(playground, x, y, direction, blocks, findX, findY, instructions, 0, i)) return instructions;
-            for (int p = 0; p < playground.length; p++) {
-                System.arraycopy(playg[p], 0, playground[p], 0, playground[0].length);
-            }
-
-            x = x0;
-            y = y0;
-            direction = dir0;
-            blocks = block0;
-
-        }
-        if(instructions.length==0) return null;
-        return instructions;
+//        int x0 = x, y0 = y, block0 = blocks, dir0 = direction;
+//        char[] instructions = new char[0];
+//        int[][] playg = new int[playground.length][playground[0].length];
+//        for (int i = 0; i < playground.length; i++) {
+//            System.arraycopy(playground[i], 0, playg[i], 0, playground[0].length);
+//        }
+//        if(getMinimalStepsAndTurns(x,y,direction,findX,findY) == 0) return new char[0];
+//        for (int i = getMinimalStepsAndTurns(x, y, direction, findX, findY);i<= searchLimit;i++) {
+//            instructions = new char[i];
+//            if (findInstructions0(playground, x, y, direction, blocks, findX, findY, instructions, 0, i)) return instructions;
+//            for (int p = 0; p < playground.length; p++) {
+//                System.arraycopy(playg[p], 0, playground[p], 0, playground[0].length);
+//            }
+//
+//            x = x0;
+//            y = y0;
+//            direction = dir0;
+//            blocks = block0;
+//
+//        }
+        char [] instructions = new char [searchLimit];
+        if(searchLimit==0) return null;
+        boolean t = findInstructions0(playground,x,y,direction,blocks,findX,findY,instructions,0, instructions.length) ;return instructions;
     }
     public static void main(String[] args) {
         char [] instr  = new char[140];

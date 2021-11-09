@@ -78,7 +78,7 @@ public class CarolPfadfinder {
 
     public static boolean findInstructions(int[][] playground, int x, int y, int direction, int blocks, int findX, int findY, char[] instructions) {
 
- /      int x0=x,y0=y,block0=blocks,dir0=direction;
+      int x0=x,y0=y,block0=blocks,dir0=direction;
  int len =instructions.length;
         Arrays.fill(instructions,'e');
         int  [][] playg = new int [playground.length][playground[0].length];
@@ -98,7 +98,7 @@ public class CarolPfadfinder {
                 blocks = block0;
 
         }
-
+return false;
 //        return findInstructions0(playground,x,y,direction,blocks,findX,findY,instructions,0, instructions.length);
 
 

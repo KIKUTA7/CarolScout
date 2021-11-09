@@ -78,16 +78,17 @@ public class CarolPfadfinder {
 
     public static boolean findInstructions(int[][] playground, int x, int y, int direction, int blocks, int findX, int findY, char[] instructions) {
 
- /*       int x0=x,y0=y,block0=blocks,dir0=direction;
+ /      int x0=x,y0=y,block0=blocks,dir0=direction;
+ int len =instructions.length;
         Arrays.fill(instructions,'e');
         int  [][] playg = new int [playground.length][playground[0].length];
         for (int i = 0; i < playground.length; i++) {
             System.arraycopy(playground[i], 0, playg[i], 0, playground[0].length);
         }
-        for (int i=instructions.length;i>=getMinimalStepsAndTurns(x,y,direction,findX,findY);i--)
+        for (int i=getMinimalStepsAndTurns(x,y,direction,findX,findY);i<=instructions.length;i++)
         {
-
-            if(findInstructions0(playground,x,y,direction,blocks,findX,findY,instructions,0,i)) {
+            instructions = new char [len];
+            if(findInstructions0(playground,x,y,direction,blocks,findX,findY,instructions,0,i)) return true;
                 for (int p = 0; p < playground.length; p++) {
                     System.arraycopy(playg[p], 0, playground[p], 0, playground[0].length);
                 }
@@ -95,20 +96,10 @@ public class CarolPfadfinder {
                 y = y0;
                 direction = dir0;
                 blocks = block0;
-            }
-            else {
-                for (int p = 0; p < playground.length; p++) {
-                    System.arraycopy(playg[p], 0, playground[p], 0, playground[0].length);
-                }
-                x = x0;
-                y = y0;
-                direction = dir0;
-                blocks = block0;
-                return findInstructions0(playground,x,y,direction,blocks,findX,findY,instructions,0,i+1);
-            }
-        } */
 
-        return findInstructions0(playground,x,y,direction,blocks,findX,findY,instructions,0, instructions.length);
+        }
+
+//        return findInstructions0(playground,x,y,direction,blocks,findX,findY,instructions,0, instructions.length);
 
 
 

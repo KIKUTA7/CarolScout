@@ -140,13 +140,13 @@ public class CarolPfadfinder {
         }
         dir1 = (direction+3) % 4;
         instructions[steps] = 'r';
-      //  if(lastTurnsAreUseless(instructions,steps)) return false;
+        //  if(lastTurnsAreUseless(instructions,steps)) return false;
         if(findInstructions0(playground,x,y,dir1,blocks,findX,findY,instructions,steps+1,k)) return true;
         x=pos1x;
         y=pos1y;
         dir2 = (direction+1) % 4;
         instructions[steps] = 'l';
-    //    if(lastTurnsAreUseless(instructions,steps)) return false;
+        //    if(lastTurnsAreUseless(instructions,steps)) return false;
         if(findInstructions0(playground,x,y,dir2,blocks,findX,findY,instructions,steps+1,k)) return true;
         x=pos1x;
         y=pos1y;
@@ -259,43 +259,32 @@ public class CarolPfadfinder {
     }
     public static char[] findOptimalSolution(int[][] playground, int x, int y, int direction, int blocks, int findX, int findY, int searchLimit) {
 
-//        int x0 = x, y0 = y, block0 = blocks, dir0 = direction;
-//        char[] instructions = new char[0];
-//        int[][] playg = new int[playground.length][playground[0].length];
-//        for (int i = 0; i < playground.length; i++) {
-//            System.arraycopy(playground[i], 0, playg[i], 0, playground[0].length);
-//        }
-//        if(getMinimalStepsAndTurns(x,y,direction,findX,findY) == 0) return new char[0];
-//        for (int i = getMinimalStepsAndTurns(x, y, direction, findX, findY);i<= searchLimit;i++) {
-//            instructions = new char[i];
-//            if (findInstructions0(playground, x, y, direction, blocks, findX, findY, instructions, 0, i)) return instructions;
-//            for (int p = 0; p < playground.length; p++) {
-//                System.arraycopy(playg[p], 0, playground[p], 0, playground[0].length);
-//            }
-//
-//            x = x0;
-//            y = y0;
-//            direction = dir0;
-//            blocks = block0;
-//
-//        }
-        char [] instructions  = new char [1];
-        if(x==findX && y==findY) return new char [0];
-        for (int i=getMinimalStepsAndTurns(x,y,direction,findX,findY);i<=searchLimit + 2;i++)
-        {
-            instructions  = new char [i];
-            if(findInstructions(playground,x,y,direction,blocks,findX,findY,instructions))
-                return instructions;
+        int x0 = x, y0 = y, block0 = blocks, dir0 = direction;
+        char[] instructions = new char[searchLimit];
+        int[][] playg = new int[playground.length][playground[0].length];
+        for (int i = 0; i < playground.length; i++) {
+            System.arraycopy(playground[i], 0, playg[i], 0, playground[0].length);
+        }
+        if(getMinimalStepsAndTurns(x,y,direction,findX,findY) == 0) return new char[0];
+        for (int i = getMinimalStepsAndTurns(x, y, direction, findX, findY);i<= searchLimit;i++) {
+            instructions = new char[i];
+            if (findInstructions0(playground, x, y, direction, blocks, findX, findY, instructions, 0, i)) return instructions;
+            for (int p = 0; p < playground.length; p++) {
+                System.arraycopy(playg[p], 0, playground[p], 0, playground[0].length);
+            }
+
+            x = x0;
+            y = y0;
+            direction = dir0;
+            blocks = block0;
 
         }
         return null;
     }
     public static void main(String[] args) {
         char [] instr  = new char[140];
-        int p [][] =
-                {{1, 0, 1, 8, 1, 3}, {0, 2, 4, 2, 6, 9}, {9, 9, 1, 5, 2, 1}, {9, 4, 1, 3, 9, 9}, {1, 8, 4, 4, 3, 6}, {9, 0, 2, 0, 8, 1}};
-printPlayground(p);
-        System.out.println(Arrays.toString(findOptimalSolution(p,0,0,1,5,5,5,21)));
-      //  System.out.println(instr);
+        int p [][] = {{0,2}};
+        System.out.println(findInstructions(p,0,0,1,1,0,1,instr));
+        System.out.println(instr);
     }
 }

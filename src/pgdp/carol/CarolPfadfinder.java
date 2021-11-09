@@ -261,6 +261,7 @@ public class CarolPfadfinder {
         for (int i = getMinimalStepsAndTurns(x, y, direction, findX, findY);i<= searchLimit;i++) {
             instructions = new char[i];
             if (findInstructions0(playground, x, y, direction, blocks, findX, findY, instructions, 0, i)) return instructions;
+            else if(findInstructions0(playground, x, y, direction, blocks, findX, findY, instructions, 0, searchLimit - i + getMinimalStepsAndTurns(x,y,direction,findX,findY))) return null;
             for (int p = 0; p < playground.length; p++) {
                 System.arraycopy(playg[p], 0, playground[p], 0, playground[0].length);
             }

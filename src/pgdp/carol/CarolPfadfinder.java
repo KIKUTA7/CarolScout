@@ -130,7 +130,7 @@ public class CarolPfadfinder {
             else x=x+(direction-1);
             return false;
         }
-        if(k-steps+1<getMinimalStepsAndTurns(x,y,direction,findX,findY)) return false;
+        if(k-steps<getMinimalStepsAndTurns(x,y,direction,findX,findY)) return false;
         //   if(playground[0][0]==1 && playground[0][1]==0 && playground[0][2]==1 && playground[0][3]==3 && playground[1][0]==0 && playground[1][1]==2 && playground[1][2]==3 && playground[1][3]==9 && playground[2][0]==8 && playground[2][1]==9 && playground[2][2]==7 && playground[2][3]==1 && playground[3][0]==9 && playground[3][1]==4 && playground[3][2]==0 && playground[3][3]==9 && playground[4][0]==9 && playground[4][1]==0 && playground[4][2]==2 && playground[4][3]==0) { return true;}
         int dir1,dir2,posy = y,posx = x,pos1x=x,pos1y=y;
         int[][] playg = new int [playground.length][playground[0].length];

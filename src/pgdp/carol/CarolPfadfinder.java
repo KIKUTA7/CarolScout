@@ -281,7 +281,7 @@ public class CarolPfadfinder {
 //        }
         char [] instructions  = new char [1];
         if(x==findX && y==findY) return new char [0];
-        for (int i=getMinimalStepsAndTurns(x,y,direction,findX,findY);i<=searchLimit+2;i++)
+        for (int i=getMinimalStepsAndTurns(x,y,direction,findX,findY);i<=searchLimit + 2;i++)
         {
             instructions  = new char [i];
             if(findInstructions(playground,x,y,direction,blocks,findX,findY,instructions))
@@ -294,7 +294,7 @@ public class CarolPfadfinder {
         char [] instr  = new char[140];
         int p [][] =
                 {{1, 0, 1, 8, 1, 3}, {0, 2, 4, 2, 6, 9}, {9, 9, 1, 5, 2, 1}, {9, 4, 1, 3, 9, 9}, {1, 8, 4, 4, 3, 6}, {9, 0, 2, 0, 8, 1}};
-
+printPlayground(p);
         System.out.println(Arrays.toString(findOptimalSolution(p,0,0,1,5,5,5,21)));
       //  System.out.println(instr);
     }

@@ -98,6 +98,7 @@ public class CarolPfadfinder {
                 blocks = block0;
 
         }
+        instructions  = new char [len];
 return false;
 //        return findInstructions0(playground,x,y,direction,blocks,findX,findY,instructions,0, instructions.length);
 

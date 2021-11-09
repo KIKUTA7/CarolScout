@@ -258,40 +258,20 @@ public class CarolPfadfinder {
             System.arraycopy(playground[i], 0, playg[i], 0, playground[0].length);
         }
         if(checker(x,y,findX,findY)) return new char[0];
-        char [] instructions1 = new char [20];
-        int st = getMinimalStepsAndTurns(x,y,direction,findX,findY);
-        int en = searchLimit;
-        while (st<en) {
-            int mid = (st + en) / 2;
-            instructions = new char[mid];
-            if (findInstructions0(playground, x, y, direction, blocks, findX, findY, instructions, 0, mid)) {
-                instructions1 = new char[instructions.length];
-                instructions1 = instructions;
+        for (int i = getMinimalStepsAndTurns(x, y, direction, findX, findY);i<= searchLimit;i++) {
+            instructions = new char[i];
+            if (findInstructions0(playground, x, y, direction, blocks, findX, findY, instructions, 0, i)) return instructions;
+            for (int p = 0; p < playground.length; p++) {
+                System.arraycopy(playg[p], 0, playground[p], 0, playground[0].length);
+            }
 
-                en = mid - 1;
-                x = x0;
-                y = y0;
-                direction = dir0;
-                blocks = block0;
-            } else {
-                st = mid + 1;
-                x = x0;
-                y = y0;
-                direction = dir0;
-                blocks = block0;
-            }
-            if(st==en) {
-                instructions = new char[st];
-                if(findInstructions0(playground, x, y, direction, blocks, findX, findY, instructions, 0, st))
-                {
-                    instructions1 = new char[instructions.length];
-                    instructions1 = instructions;
-                }
-            }
+            x = x0;
+            y = y0;
+            direction = dir0;
+            blocks = block0;
+
         }
-        if(searchLimit <getMinimalStepsAndTurns(x,y,direction,findX,findY)) instructions1 = null;
-        return instructions1;
-
+        return null;
     }
     public static void main(String[] args) {
         char [] instr  = new char[140];

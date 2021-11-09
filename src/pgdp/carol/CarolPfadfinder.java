@@ -179,7 +179,40 @@ public class CarolPfadfinder {
         posx = x; posy = y;
 
         instructions[steps] = 'n';
+        if(steps>=1 && instructions[steps - 1]=='p') {
+            instructions [steps] = 'p';
+            if(steps>=1 && instructions[steps - 1]=='n') return false;
+            if(direction % 2 == 1)
+            {
+                posy = y+(-1)*(direction-2);
+                if(0 <= posy && posy <= playground[0].length - 1 &&  posx <=playground.length - 1
+                        && playground[x][y] != -1 && blocks >= 1 &&   playground[posx][posy] < 9)
+                {
+                    playground[posx][posy]++;
+                    blocks--;
 
+                    return findInstructions0(playground, x, y, direction, blocks, findX, findY, instructions, steps + 1, k);
+
+                }
+
+
+            }
+
+            else
+            {
+                posx = x+(-1)*(direction-1);
+                if( posy <= playground[0].length - 1 && 0<=posx && posx <=playground.length - 1
+                        && playground[x][y] != -1 && blocks >= 1 &&   playground[posx][posy] < 9)
+                {
+                    playground[posx][posy]++;
+                    blocks--;
+
+                    return findInstructions0(playground, x, y, direction, blocks, findX, findY, instructions, steps + 1, k);
+                }
+
+            }
+            return false;
+        }
         if (direction % 2 == 1)
         {
             posy = y+(-1)*(direction-2);

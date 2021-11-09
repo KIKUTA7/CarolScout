@@ -142,14 +142,10 @@ public class CarolPfadfinder {
         instructions[steps] = 'r';
         //  if(lastTurnsAreUseless(instructions,steps)) return false;
         if(findInstructions0(playground,x,y,dir1,blocks,findX,findY,instructions,steps+1,k)) return true;
-        x=pos1x;
-        y=pos1y;
         dir2 = (direction+1) % 4;
         instructions[steps] = 'l';
         //    if(lastTurnsAreUseless(instructions,steps)) return false;
         if(findInstructions0(playground,x,y,dir2,blocks,findX,findY,instructions,steps+1,k)) return true;
-        x=pos1x;
-        y=pos1y;
         instructions[steps] = 's';
         if (direction % 2 == 1) {
             posy = y + (-1) * (direction - 2);
@@ -181,8 +177,6 @@ public class CarolPfadfinder {
             }
 
         }
-        x=pos1x;
-        y=pos1y;
         posx = x; posy = y;
 
         instructions[steps] = 'n';
@@ -217,8 +211,6 @@ public class CarolPfadfinder {
         for (int p = 0; p < playground.length; p++) {
             System.arraycopy(playg[p], 0, playground[p], 0, playground[0].length);
         }
-        x=pos1x;
-        y=pos1y;
         posx = x; posy = y;
         instructions [steps] = 'p';
         if(steps>=1 && instructions[steps - 1]=='n') return false;

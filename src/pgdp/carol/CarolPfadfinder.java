@@ -280,7 +280,8 @@ public class CarolPfadfinder {
 //
 //        }
         char [] instructions  = new char [1];
-        for (int i=0;i<=searchLimit;i++)
+        if(x==findX && y==findY) return new char [0];
+        for (int i=1;i<=searchLimit;i++)
         {
             instructions  = new char [i];
             if(findInstructions(playground,x,y,direction,blocks,findX,findY,instructions))

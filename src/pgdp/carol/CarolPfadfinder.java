@@ -155,7 +155,13 @@ public class CarolPfadfinder {
             posy = y + (-1) * (direction - 2);
             if (0 <= posy && posy <= playground[0].length - 1 &&  posx<= playground.length - 1
                     && Math.abs(playground[posx][posy] - playground[x][y]) <= 1){
-             //   if(checker(posx,posy,findX,findY)) return true;
+                if(checker(posx,posy,findX,findY))
+                {
+                    for (int i = steps + 1 ; i <= instructions.length - 1 ; i++) {
+                        instructions[i] = 'e';
+                    }
+                    return true;
+                }
                 if(findInstructions0(playground, posx, posy, direction, blocks, findX, findY, instructions, steps + 1,k)) return true;
             }
 
@@ -163,7 +169,13 @@ public class CarolPfadfinder {
             posx = x + (-1) * (direction - 1);
             if ( posy <= playground[0].length - 1 && 0<=posx && posx<= playground.length - 1
                     && Math.abs(playground[posx][posy] - playground[x][y]) <= 1) {
-              //  if(checker(posx,posy,findX,findY)) return true;
+                if(checker(posx,posy,findX,findY))
+                {
+                    for (int i = steps + 1 ; i <= instructions.length - 1 ; i++) {
+                        instructions[i] = 'e';
+                    }
+                    return true;
+                }
                 if(findInstructions0(playground, posx, posy, direction, blocks, findX, findY, instructions, steps + 1,k)) return true;
 
             }

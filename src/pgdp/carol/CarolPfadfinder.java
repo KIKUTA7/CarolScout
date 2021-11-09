@@ -259,7 +259,7 @@ public class CarolPfadfinder {
     }
     public static char[] findOptimalSolution(int[][] playground, int x, int y, int direction, int blocks, int findX, int findY, int searchLimit) {
 
-        int x0 = x, y0 = y, block0 = blocks, dir0 = direction;
+        int  block0 = blocks, dir0 = direction;
         char[] instructions = new char[searchLimit];
         int[][] playg = new int[playground.length][playground[0].length];
         for (int i = 0; i < playground.length; i++) {
